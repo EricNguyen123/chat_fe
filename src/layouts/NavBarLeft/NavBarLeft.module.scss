@@ -1,0 +1,12 @@
+.wrapper {
+  width: var(--width-navbar);
+  height: 100%;
+  background-color: var(--white) ;
+  padding: 5px 0px 26px 8px;
+  position: fixed;
+  z-index: 990;
+}
+
+.footer {
+  width: 100%;
+}

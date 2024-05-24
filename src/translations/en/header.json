@@ -1,0 +1,21 @@
+{
+  "menu": {
+    "titleEnglish": "English",
+    "language": "Language",
+    "typeLanguage": "language",
+    "en": "en",
+    "vi": "vi",
+    "vietnamese": "Tiếng Việt",
+    "titleFeedback": "Feedback and help",
+    "titleKeyboard": "Keyboard shortcuts",
+    "titleProfile": "View Profile",
+    "titleCoins": "Get coins",
+    "titleSettings": "Settings",
+    "titleLogout": "Log out"
+  },
+  "status": {
+    "following": "Following",
+    "followed": "Followed",
+    "liked": "Liked"
+  }
+}

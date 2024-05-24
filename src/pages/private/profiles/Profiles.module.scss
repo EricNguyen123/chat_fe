@@ -1,0 +1,10 @@
+.wrapper {
+  width: calc(100% - var(--width-navbar));
+  height: 100%;
+  margin-left: var(--width-navbar);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--white);
+  padding: 32px 24px 36px;
+}

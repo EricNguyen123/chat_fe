@@ -1,0 +1,124 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-top: 60px;
+  margin-left: 30px;
+}
+
+.box-info {
+  width: 100%;
+  position: relative;
+  flex: 0 0 auto;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  max-width: 624px;
+}
+
+.edit-icon {
+  width: 20px;
+  height: 20px;
+  color: rgb(22, 24, 35);
+  margin-right: 6px;
+}
+
+.font-name {
+  font-family: var(--font-family-1);
+}
+
+.row-1 {
+  display: flex;
+  align-items: center;
+}
+
+.col-2 {
+  flex: 1 1 0%;
+  cursor: pointer;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  margin-left: 20px;
+}
+
+.info-name {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 38px;
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  word-break: break-word;
+}
+
+.title-name {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  text-overflow: ellipsis;
+  height: 25px;
+  overflow: hidden;
+  max-width: 450px;
+  white-space: nowrap;
+  display: flex;
+  align-items: flex-end;
+}
+
+.box-btn {
+  width: 100%;
+}
+
+.box-container {
+  width: max-content;
+  position: relative;
+  height: 36px;
+  padding: 0px;
+  margin: 16px 0px 0px;
+}
+
+.row-2 {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-top: 22px;
+  color: rgba(18, 18, 18, 0.75);
+}
+
+.item {
+  margin-right: 20px;
+  color: rgb(22, 24, 35);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  display: flex;
+  direction: ltr;
+  -webkit-box-align: baseline;
+  align-items: baseline;
+  cursor: pointer;
+}
+
+.number {
+  font-weight: 700;
+}
+
+.status {
+  color: rgba(22, 24, 35, 0.75);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  display: inline-block;
+  margin-left: 6px;
+}
+
+.row-3 {
+  text-align: left;
+  color: rgb(22, 24, 35);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  white-space: pre-line;
+  margin-top: 10px;
+}

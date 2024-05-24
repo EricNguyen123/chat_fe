@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getOtherUser, getUser, getUsers } from '../../redux/users/actions';
 import config from '../../config';
 import { useNavigate } from 'react-router-dom';
+import { encode } from '../../utils/encode';
 
 
 const cx = classNames.bind(styles);
@@ -57,17 +58,22 @@ const NavBarLeft = () => {
                       activeIcon={<item.activeIcon/>}
                       onClick={() => {dispatch(getUser())}} 
                   />))}
-
+            <div className={cx('line-nav')}></div>
             {(users.length > 0) && (
-                users.map((user, index) => (
-                  <MenuItem 
-                    icon={user.icon}  
-                    title={user.name}
-                    type={'footer'}
-                    key={index} 
-                    to={`/profiles/${user.id}`}
-                    onClick={() => {handleUser(user)}} />
-                ))
+                <>
+                <h2 className={cx('title-nav-footer')}>Accounts being followed</h2>
+                {
+                  users.map((user, index) => (
+                    <MenuItem 
+                      icon={user.icon}  
+                      title={user.name}
+                      type={'footer'}
+                      key={index} 
+                      to={`/profiles/${user.id}`}
+                      onClick={() => {handleUser(user)}} />
+                  ))
+                }
+                </>
               )}
         </Menu>
         <div className={cx('footer')}>

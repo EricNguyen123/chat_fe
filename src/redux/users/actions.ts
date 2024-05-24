@@ -30,3 +30,23 @@ export const getUsersResult = (result: any, isSuccess = true): Action => ({
   type: isSuccess ? types.GET_USERS_SUCCESS : types.GET_USERS_FAILED,
   payload: result,
 });
+
+export const following = (data: any): Action => ({
+  type: types.FOLLOWING,
+  payload: data,
+});
+
+export const followingResult = (result: any, isSuccess = true): Action => ({
+  type: isSuccess ? types.FOLLOWING_SUCCESS : types.FOLLOWING_FAILED,
+  payload: result,
+});
+
+export const unfollow = (data: any): Action => ({
+  type: types.UNFOLLOW,
+  payload: data,
+});
+
+export const unfollowResult = (result: any, isSuccess = true): Action => ({
+  type: isSuccess ? types.UNFOLLOW_SUCCESS : types.UNFOLLOW_FAILED,
+  payload: result,
+});

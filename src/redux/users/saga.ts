@@ -5,11 +5,15 @@ import {
   getUserResult,
   getOtherUserResult,
   getUsersResult,
+  followingResult,
+  unfollowResult,
 } from "./actions";
 import {
   getUserApi,
   getOtherUserApi,
   getUsersApi,
+  followingApi,
+  unfollowApi,
 } from "./api";
 import types from "./type";
 
@@ -45,11 +49,34 @@ function* getOtherUserSaga(props: any) {
   }
 }
 
+function* followSaga(props: any) {
+  const data = JSON.parse(localStorage.data);
+  const res: ResponseResult = yield call(followingApi, { item: props.payload, ...data});
+  if (res.status === 200) {
+    yield put(followingResult(res.data));
+  } else {
+    const isSuccess = false;
+    yield put(followingResult(res, isSuccess));
+  }
+}
+
+function* unfollowSaga(props: any) {
+  const data = JSON.parse(localStorage.data);
+  const res: ResponseResult = yield call(unfollowApi, { item: props.payload, ...data});
+  if (res.status === 200) {
+    yield put(unfollowResult(res.data));
+  } else {
+    const isSuccess = false;
+    yield put(unfollowResult(res, isSuccess));
+  }
+}
 
 export default function* rootSaga() {
   yield all([
     takeEvery(types.GET_USER, getUserSaga),
     takeEvery(types.GET_OTHER_USER, getOtherUserSaga),
     takeEvery(types.GET_USERS, getUsersSaga),
+    takeEvery(types.FOLLOWING, followSaga),
+    takeEvery(types.UNFOLLOW, unfollowSaga),
   ]);
 }

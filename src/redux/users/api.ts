@@ -23,3 +23,19 @@ export const getOtherUserApi = (data: any): Promise<AxiosResponse> => {
     }
   });
 };
+
+export const followingApi = (data: any): Promise<AxiosResponse> => {
+  return Axios.get(`/relationships/follow/${data.item.id}`, {
+    headers: {
+      Authorization: `Bearer ${data.token}`
+    }
+  });
+};
+
+export const unfollowApi = (data: any): Promise<AxiosResponse> => {
+  return Axios.get(`/relationships/unfollow/${data.item.id}`, {
+    headers: {
+      Authorization: `Bearer ${data.token}`
+    }
+  });
+};

@@ -122,3 +122,33 @@
   white-space: pre-line;
   margin-top: 10px;
 }
+
+.unfollow-btn {
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(22, 24, 35, 0.12);
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  background-color: rgb(255, 255, 255);
+  float: right;
+  margin-left: 8px;
+  &:hover {
+    background-color: rgba(22, 24, 35, 0.03);
+  }
+}
+
+.box-btn-fl {
+  display: flex;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  opacity: 1;
+  z-index: unset;
+}

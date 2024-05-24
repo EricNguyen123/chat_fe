@@ -4,17 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../../../components/Loading';
 import { Link, useNavigate } from 'react-router-dom';
 import config from '../../../../config';
-import { EditIcon, UserIcon } from '../../../../components/Icons';
+import { EditIcon, UnFollow, UserIcon } from '../../../../components/Icons';
 import ButtonCustom from '../../../../components/ButtonCustom';
 import { useEffect } from 'react';
-import { getOtherUser, getUser } from '../../../../redux/users/actions';
+import { following, unfollow } from '../../../../redux/users/actions';
 import { useTranslation } from 'react-i18next';
 
 const cx = classNames.bind(styles);
 
 const BoxInfo = () => {
   const dispatch = useDispatch();
-  const userSelector = useSelector(({ users } : any) => users);
+  let userSelector = useSelector(({ users } : any) => users);
   const { t } = useTranslation("header");
   const data = JSON.parse(localStorage.data);
   const navigate = useNavigate();
@@ -25,11 +25,13 @@ const BoxInfo = () => {
   const statusInfos = [
     {
       status: t("status.following"),
-      number: 0,
+      number:  userSelector.userInfo && userSelector.userInfo.followingCount ? 
+                userSelector.userInfo.followingCount : 0,
     },
     {
       status: t("status.followed"),
-      number: 0,
+      number: userSelector.userInfo && userSelector.userInfo.followerCount ? 
+                userSelector.userInfo.followerCount : 0,
     },
     {
       status: t("status.liked"),
@@ -37,9 +39,24 @@ const BoxInfo = () => {
     }
   ]
 
+  const handleFollow = () => {
+    dispatch(following({id: userSelector.userInfo.id}))
+  }
+  
+  const handleUnFollow = () => {
+    dispatch(unfollow({id: userSelector.userInfo.id}))
+  }
+  
+  if(userSelector.userInfo !== undefined) {
+    localStorage.setItem("userInfoCurrent", JSON.stringify(userSelector))
+  }
+  else if (localStorage.userInfoCurrent) {
+    userSelector = JSON.parse(localStorage.userInfoCurrent);
+  }
+  
   return (
     <div className={cx('wrapper')}>
-      <Loading isLoading={userSelector.loading}/>
+      {/* <Loading isLoading={userSelector.loading}/> */}
       <div className={cx('box-info')}>
         <div className={cx('row-1')}>
           <div className={cx('col-1')}>
@@ -60,18 +77,23 @@ const BoxInfo = () => {
               <div className={cx('box-container')}>
                 {
                   userSelector.userInfo && 
-                  userSelector.userInfo.id === data.id && 
+                  userSelector.userInfo.id === data.id ?
                   (<ButtonCustom size={"136-36-4"}>
                     <EditIcon className={cx('edit-icon')}/>
                     <span className={cx('font-name')}>Edit Profiles</span>
+                  </ButtonCustom>) : userSelector.status || userSelector.isFollowing ? 
+                  (<div className={cx('box-btn-fl')}>
+                    <ButtonCustom size={"164-36-4"}>
+                      <span className={cx('font-name')}>Message</span>
+                    </ButtonCustom>
+                    <div className={cx('unfollow-btn')} onClick={handleUnFollow}>
+                      <UnFollow/>
+                    </div>
+                  </div>) :
+                  (<ButtonCustom size={"208-36-4"} onClick={handleFollow}>
+                    <span className={cx('font-name')}>Follow</span>
                   </ButtonCustom>)
                 }
-                {/* <ButtonCustom size={"164-36-4"}>
-                  <span className={cx('font-name')}>Message</span>
-                </ButtonCustom> */}
-                {/* <ButtonCustom size={"208-36-4"}>
-                  <span className={cx('font-name')}>Follow</span>
-                </ButtonCustom> */}
               </div>
             </div>
           </div>

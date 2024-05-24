@@ -1,9 +1,12 @@
+import { userInfo } from "os";
 import { Action, AuthState } from "../../types/redux";
 import types from "./type";
 
 const initState = {
   loading: false,
   userInfo: undefined,
+  status: false,
+  isFollowing: false
 };
 
 export default function authReducer(
@@ -16,6 +19,7 @@ export default function authReducer(
     }
 
     case types.GET_USER_SUCCESS: {
+      console.log(action.payload)
       return {
         ...state,
         loading: false,
@@ -26,6 +30,48 @@ export default function authReducer(
     case types.GET_USER_FAILED: {
       return { ...state, loading: false };
     }
+
+    case types.FOLLOWING: {
+      return { ...state, loading: true };
+    }
+
+    case types.FOLLOWING_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        status: action.payload.success || false,
+        userInfo: {  
+          ...state.userInfo,
+          followingCount: action.payload.followingCount, 
+          followerCount: action.payload.followerCount }
+      };
+    }
+
+    case types.FOLLOWING_FAILED: {
+      return { ...state, loading: false };
+    }
+
+    case types.UNFOLLOW: {
+      return { ...state, loading: true };
+    }
+
+    case types.UNFOLLOW_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        status: !action.payload.success || undefined,
+        isFollowing: false,
+        userInfo: {  
+          ...state.userInfo,
+          followingCount: action.payload.followingCount, 
+          followerCount: action.payload.followerCount }
+      };
+    }
+
+    case types.UNFOLLOW_FAILED: {
+      return { ...state, loading: false };
+    }
+
 
     case types.GET_USERS: {
       return { ...state, loading: true };
@@ -52,6 +98,7 @@ export default function authReducer(
         ...state,
         loading: false,
         userInfo: action.payload || undefined,
+        isFollowing: action.payload.isFollowing || undefined,
       };
     }
 

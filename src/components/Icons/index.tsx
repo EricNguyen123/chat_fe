@@ -194,7 +194,7 @@ export const UserIcon: React.FC<Props> = ({ borderRadius = "50%", width = "30px"
         height={height}
         style={{ borderRadius }}
         alt="userIcon" 
-        src="https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-giso/6d6c3f821440fd521ecb6f804b1f92d8~c5_720x720.jpeg?lk3s=a5d48078&amp;nonce=11232&amp;refresh_token=215520ed147270d252eb022738a99968&amp;x-expires=1716598800&amp;x-signature=QTPGxMuyTxmmiaa6Ut4Hcznmg6Y%3D&amp;shp=a5d48078&amp;shcp=81f88b70" 
+        src="	https://p16-sign-useast2a.tiktokcdn.com/tos-useast…XJKDQp7mN5ZZmq1mDcA%3D&shp=a5d48078&shcp=81f88b70" 
         className={className}/>
 );
 

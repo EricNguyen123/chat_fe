@@ -9,7 +9,7 @@ const initState = {
   isFollowing: false
 };
 
-export default function authReducer(
+export default function userReducer(
   state: AuthState = initState,
   action: Action
 ) {
@@ -19,7 +19,6 @@ export default function authReducer(
     }
 
     case types.GET_USER_SUCCESS: {
-      console.log(action.payload)
       return {
         ...state,
         loading: false,

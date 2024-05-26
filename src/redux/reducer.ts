@@ -6,7 +6,8 @@ import { combineReducers } from "redux";
 
 
 import authReducer from "./auth/reducer";
-import userReducer from "./users/reducer"
+import userReducer from "./users/reducer";
+import imageUploadReducer from "./image-upload/reducer";
 
 import storage from "redux-persist/es/storage";
 import persistReducer from "redux-persist/es/persistReducer";
@@ -16,7 +17,8 @@ const rootPersistConfig = {
   storage,
   blacklist: [
     "auth",
-    "users"
+    "users",
+    "imageUpload",
   ],
 };
 
@@ -29,6 +31,7 @@ const authPersistConfig = {
 const reducers = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
   users: userReducer,
+  imageUpload: imageUploadReducer,
 });
 
 type RootState = ReturnType<typeof reducers>;

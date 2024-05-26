@@ -16,8 +16,8 @@ const NavBarLeft = () => {
   const dispatch = useDispatch();
   const userSelector = useSelector(({ users } : any) => users);
   const items = itemNavBar();
-  const data = JSON.parse(localStorage.data);
-  const currentUser = data.id;
+  const data = localStorage.data ? JSON.parse(localStorage.data) : undefined;
+  const currentUser = data ? data.id : undefined;
 
   const navigate = useNavigate();
   const handleRedirectPage = (path: string) => {

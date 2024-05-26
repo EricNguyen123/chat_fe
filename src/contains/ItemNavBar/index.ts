@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 export const itemNavBar = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { t } = useTranslation('navbar');
-  const data = JSON.parse(localStorage.data);
+  const data = localStorage.data ? JSON.parse(localStorage.data) : undefined;
   return [
     {
       title: t("navbar.home"),
@@ -28,7 +28,7 @@ export const itemNavBar = () => {
     },
     {
       title: t("navbar.profile"),
-      path: `/profiles/${data.id}`,
+      path: data ? `/profiles/${data.id}` : '#',
       icon: UserIcon,
       activeIcon: UserIcon
     }

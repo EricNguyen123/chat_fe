@@ -9,6 +9,11 @@ export type AuthState = {
   userInfo: any | undefined;
 };
 
+export type UploadFile = {
+  loading: boolean;
+  media: any | undefined;
+};
+
 type ErrorResponse = {
   message: string;
   name: string;

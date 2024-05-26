@@ -152,3 +152,42 @@
   opacity: 1;
   z-index: unset;
 }
+
+.img-avt {
+  width: 116px;
+  height: 116px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-up {
+  border-radius: 50%;
+}
+
+.col-1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 20px;
+}
+
+.upload-img {
+  position: relative;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(22, 24, 35, 0.12);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  &:hover {
+    background-color: rgba(22, 24, 35, 0.03);
+  }
+}
+
+.line-right {
+  border-right: 1px solid rgba(22, 24, 35, 0.12);
+}

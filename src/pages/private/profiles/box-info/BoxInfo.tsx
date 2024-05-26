@@ -1,20 +1,22 @@
 import classNames from 'classnames/bind';
 import styles from './BoxInfo.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import Loading from '../../../../components/Loading';
-import { Link, useNavigate } from 'react-router-dom';
-import config from '../../../../config';
+import { useNavigate } from 'react-router-dom';
 import { EditIcon, UnFollow, UserIcon } from '../../../../components/Icons';
 import ButtonCustom from '../../../../components/ButtonCustom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { following, unfollow } from '../../../../redux/users/actions';
 import { useTranslation } from 'react-i18next';
+import ImageUpload from '../../../../components/ImageUpload';
+import Image from '../../../../components/Image';
 
 const cx = classNames.bind(styles);
 
 const BoxInfo = () => {
   const dispatch = useDispatch();
   let userSelector = useSelector(({ users } : any) => users);
+  const media = useSelector(({ imageUpload } : any) => imageUpload);
+  const [image, setImage] = useState("");
   const { t } = useTranslation("header");
   const data = JSON.parse(localStorage.data);
   const navigate = useNavigate();
@@ -39,6 +41,13 @@ const BoxInfo = () => {
     }
   ]
 
+  useEffect(() => {
+    if (userSelector && userSelector.userInfo) {
+      setImage(process.env.REACT_APP_BASE_URL + userSelector.userInfo.imagAvatar)
+    }
+    
+  }, [userSelector])
+
   const handleFollow = () => {
     dispatch(following({id: userSelector.userInfo.id}))
   }
@@ -54,13 +63,21 @@ const BoxInfo = () => {
     userSelector = JSON.parse(localStorage.userInfoCurrent);
   }
   
+
+
   return (
     <div className={cx('wrapper')}>
       {/* <Loading isLoading={userSelector.loading}/> */}
       <div className={cx('box-info')}>
         <div className={cx('row-1')}>
-          <div className={cx('col-1')}>
-            <UserIcon width={"116px"} height={"116px"}/>
+          <div className={cx('col-1', 'line-right')}>
+            <div className={cx('img-avt')}>
+              {media ? <Image className={cx('img-up')} src={image} alt=''/> :
+              (<UserIcon width={"116px"} height={"116px"}/>)}
+            </div>
+            <div className={cx('upload-img')}>
+              <ImageUpload fdispath={1}/>
+            </div>
           </div>
           <div className={cx('col-2')}>
             <div className={cx('info-name')}>

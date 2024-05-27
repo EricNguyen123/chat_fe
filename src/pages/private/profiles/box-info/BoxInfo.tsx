@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './BoxInfo.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { EditIcon, UnFollow, UserIcon } from '../../../../components/Icons';
+import { EditIcon, UnFollow } from '../../../../components/Icons';
 import ButtonCustom from '../../../../components/ButtonCustom';
 import { useEffect, useState } from 'react';
 import { following, unfollow } from '../../../../redux/users/actions';
@@ -63,8 +63,6 @@ const BoxInfo = () => {
     userSelector = JSON.parse(localStorage.userInfoCurrent);
   }
   
-
-
   return (
     <div className={cx('wrapper')}>
       {/* <Loading isLoading={userSelector.loading}/> */}
@@ -73,11 +71,12 @@ const BoxInfo = () => {
           <div className={cx('col-1', 'line-right')}>
             <div className={cx('img-avt')}>
               {media ? <Image className={cx('img-up')} src={image} alt=''/> :
-              (<UserIcon width={"116px"} height={"116px"}/>)}
+              undefined}
             </div>
-            <div className={cx('upload-img')}>
+            { userSelector.userInfo && userSelector.userInfo.id === data.id ? 
+            (<div className={cx('upload-img')}>
               <ImageUpload fdispath={1}/>
-            </div>
+            </div>) : undefined }
           </div>
           <div className={cx('col-2')}>
             <div className={cx('info-name')}>

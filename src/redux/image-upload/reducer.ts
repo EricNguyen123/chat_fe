@@ -43,6 +43,22 @@ export default function uploadFileReducer(
       return { ...state, loading: false };
     }
 
+    case types.GET_IMAGE: {
+      return { ...state, loading: true };
+    }
+
+    case types.GET_IMAGE_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        media: action.payload.mediaUrl || undefined,
+      };
+    }
+
+    case types.GET_IMAGE_FAILED: {
+      return { ...state, loading: false };
+    }
+
     default:
       return state;
   }

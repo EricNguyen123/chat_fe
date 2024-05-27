@@ -8,10 +8,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/auth/actions';
 import { useNavigate } from 'react-router-dom';
 import ButtonNav from '../../components/ButtonNav';
-import { UserIcon } from '../../components/Icons';
+import { AvatarIcon } from '../../components/Icons';
 import Menu from '../../components/Popper/Menu';
 import { MyMenu } from '../../contains/Menu';
 import { useEffect } from 'react';
+import { getUser } from '../../redux/users/actions';
 
 
 const cx = classNames.bind(styles);
@@ -19,8 +20,10 @@ const cx = classNames.bind(styles);
 const Header = () => {
   const { t } = useTranslation('auth');
   const authSelector = useSelector(({ auth } : any) => auth);
+  const userSelector = useSelector(({ users } : any) => users);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleLogout = () => {
     dispatch(logout());
     navigate(config.routes.login);
@@ -33,7 +36,9 @@ const Header = () => {
   };
 
   useEffect(()=>{
-
+    if(authSelector.authenticated) {
+      dispatch(getUser())
+    }
   },[authSelector.authenticated])
 
   return (
@@ -58,7 +63,7 @@ const Header = () => {
             <Menu items={MyMenu(t)} onChange={handleMenuChange}>
               <ButtonNav>
                 <div className={cx('img-user')}>
-                  <UserIcon width='48px' height='48px'/>
+                  <AvatarIcon width='48px' height='48px' avatar={userSelector.currentUser && userSelector.currentUser.imagAvatar ? userSelector.currentUser.imagAvatar : ""}/>
                 </div>
               </ButtonNav>
             </Menu>

@@ -8,6 +8,7 @@ import { getOtherUser, getUser, getUsers } from '../../redux/users/actions';
 import config from '../../config';
 import { useNavigate } from 'react-router-dom';
 import { encode } from '../../utils/encode';
+import { AvatarIcon } from '../../components/Icons';
 
 
 const cx = classNames.bind(styles);
@@ -15,7 +16,7 @@ const cx = classNames.bind(styles);
 const NavBarLeft = () => {
   const dispatch = useDispatch();
   const userSelector = useSelector(({ users } : any) => users);
-  const items = itemNavBar();
+  const items = itemNavBar(userSelector && userSelector.currentUser ? userSelector.currentUser : undefined);
   const data = localStorage.data ? JSON.parse(localStorage.data) : undefined;
   const currentUser = data ? data.id : undefined;
 
@@ -23,13 +24,13 @@ const NavBarLeft = () => {
   const handleRedirectPage = (path: string) => {
     navigate(path);
   };
-  
+
   const users: any[] = useMemo(() => {
     if ( currentUser && Array.isArray(userSelector.usersInfo) && userSelector.usersInfo.length > 0) {
       const newUsers: any[] = [];
       userSelector.usersInfo.forEach((item: any) => {
          if (item.id !== currentUser) {
-           newUsers.push(item);
+           newUsers.push({...item, icon: <AvatarIcon avatar={item.imagAvatar}/>});
          }
       })
       
@@ -54,8 +55,8 @@ const NavBarLeft = () => {
                       key={index}
                       title={item.title}
                       to={item.path}
-                      icon={<item.icon/>}
-                      activeIcon={<item.activeIcon/>}
+                      icon={item.icon}
+                      activeIcon={item.activeIcon}
                       onClick={() => {dispatch(getUser())}} 
                   />))}
             <div className={cx('line-nav')}></div>
@@ -66,6 +67,7 @@ const NavBarLeft = () => {
                   users.map((user, index) => (
                     <MenuItem 
                       icon={user.icon}  
+                      activeIcon={user.icon}
                       title={user.name}
                       type={'footer'}
                       key={index} 

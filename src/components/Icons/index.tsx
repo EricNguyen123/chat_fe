@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "../Image";
+import { useDispatch, useSelector } from "react-redux";
+import { getImage } from "../../redux/image-upload/actions";
 
 interface Props {
     className?: string;
     width?: string;
     height?: string;
     borderRadius?: string;
+    avatar?: any;
   }
 
 export const UploadIcon: React.FC<Props> = ({ width = '3.2rem', height = '3.2rem', className }) => (
@@ -188,15 +191,25 @@ export const LiveActiveIcon: React.FC<Props> = ({ width = '3.2rem', height = '3.
   </svg>
 );
 
-export const UserIcon: React.FC<Props> = ({ borderRadius = "50%", width = "30px", height = "30px", className }) => (
-    <Image
-        width={width}
-        height={height}
-        style={{ borderRadius }}
-        alt="userIcon" 
-        src="	https://p16-sign-useast2a.tiktokcdn.com/tos-useast…XJKDQp7mN5ZZmq1mDcA%3D&shp=a5d48078&shcp=81f88b70" 
-        className={className}/>
-);
+export const AvatarIcon: React.FC<Props> = ({ borderRadius = "50%", width = "30px", height = "30px", className, avatar }) => {
+    const [image, setImage] = useState("");
+
+    useEffect(() => {
+        if (avatar) {
+            setImage(process.env.REACT_APP_BASE_URL + avatar);
+        }
+    }, [avatar]);
+    return (
+        <Image
+            borderRadius={borderRadius}
+            width={width}
+            height={height}
+            src={image}
+            alt=''
+            className={className}
+        />
+    );   
+};
 
 export const EditIcon: React.FC<Props> = ({ width = '1em', height = '1em', className }) => (
     <svg xmlns="http://www.w3.org/2000/svg" 

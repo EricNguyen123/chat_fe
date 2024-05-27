@@ -14,7 +14,6 @@ const ImageUpload: React.FC<Props> = ({ fdispath }) => {
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const files = event.target.files;
       if (files) {
-        console.log(fdispath)
         Array.from(files).forEach((file) => {
           dispatch( fdispath ? uploadAvatar(file) : uploadFile(file));
         });

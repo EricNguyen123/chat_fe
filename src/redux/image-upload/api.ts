@@ -17,3 +17,12 @@ export const uploadAvatarApi = (data: any): Promise<AxiosResponse> => {
     }
   });
 };
+
+export const getImageApi = (data: any): Promise<AxiosResponse> => {
+  return Axios.get(`/media/image/${data.avatar}`, {
+    headers: {
+      Authorization: `Bearer ${data.token}`,
+      'Content-Type': 'multipart/form-data'
+    }
+  });
+};

@@ -23,3 +23,12 @@ export const uploadAvatarResult = (result: any, isSuccess = true): Action => ({
   payload: result,
 });
 
+export const getImage = (data: any): Action => ({
+  type: types.GET_IMAGE,
+  payload: data,
+});
+
+export const getImageResult = (result: any, isSuccess = true): Action => ({
+  type: isSuccess ? types.GET_IMAGE_SUCCESS : types.GET_IMAGE_FAILED,
+  payload: result,
+});

@@ -13,7 +13,6 @@ import {
 } from "./api";
 import types from "./type";
 import config from "../../config";
-import { setAuthToken } from "../../utils";
 
 function* signinSaga(props: any) {
   const { data, handleRedirectPage } = props.payload;

@@ -22,6 +22,7 @@ export default function userReducer(
       return {
         ...state,
         loading: false,
+        currentUser: action.payload || undefined,
         userInfo: action.payload || undefined,
       };
     }

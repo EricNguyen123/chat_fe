@@ -23,6 +23,7 @@ import Viewer from '../../../../components/Viewer';
 import { following, unfollow } from '../../../../redux/users/actions';
 import PostModal from '../../../../components/PostModal';
 import Loading from '../../../../components/Loading';
+import { formatDate } from '../../../../utils/formatDate';
 
 const cx = classNames.bind(styles);
 
@@ -73,6 +74,7 @@ const ItemPost: React.FC<Props> = ({ data, modal = false }) => {
   const dataUser = localStorage.data ? JSON.parse(localStorage.data) : undefined;
   const currentUserId = dataUser ? dataUser.id : undefined;
   const [newData, setNewData] = useState<PostData>(data);
+  
 
   useEffect(() => {
     if (newData.avatarMedia) {
@@ -92,7 +94,7 @@ const ItemPost: React.FC<Props> = ({ data, modal = false }) => {
       closeViewer();
     }
   }, [postSelector, postSelector.post])
-  
+
   useEffect(() => {
       setNewData(data);
   },[data])
@@ -179,7 +181,7 @@ const ItemPost: React.FC<Props> = ({ data, modal = false }) => {
         </div>
         <div className={cx('des')}>
           <span className={cx('name')}>{newData.User.name}</span>
-          <span className={cx('time')}>{newData.updatedAt}</span>
+          <span className={cx('time')}>{formatDate(newData.updatedAt)}</span>
         </div>
         <div className={cx('btn-control')}>
           <MoreMenu items={moreMenu}/>

@@ -12,6 +12,7 @@ import ConfirmDelete from '../../../../components/ConfirmDelete';
 import { deletePost } from '../../../../redux/posts/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import Viewer from '../../../../components/Viewer';
+import { formatDate } from '../../../../utils/formatDate';
 
 const cx = classNames.bind(styles);
 
@@ -128,7 +129,7 @@ const Reply: React.FC<PropsData> = ({ data }) => {
             </div>
             <div className={cx('des')}>
               <span className={cx('name')}>{data.User.name}</span>
-              <span className={cx('time')}>{data.updatedAt}</span>
+              <span className={cx('time')}>{formatDate(data.updatedAt)}</span>
             </div>
           </div>
           <div className={cx('icon-cmt')}>

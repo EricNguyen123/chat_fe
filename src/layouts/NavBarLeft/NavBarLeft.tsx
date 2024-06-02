@@ -5,15 +5,17 @@ import { itemNavBar } from '../../contains/ItemNavBar';
 import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOtherUser, getUser, getUsers } from '../../redux/users/actions';
-import config from '../../config';
 import { useNavigate } from 'react-router-dom';
-import { encode } from '../../utils/encode';
 import { AvatarIcon } from '../../components/Icons';
+import ButtonUpload from '../../components/ButtonUpload';
+import { useTranslation } from 'react-i18next';
+import config from '../../config';
 
 
 const cx = classNames.bind(styles);
 
 const NavBarLeft = () => {
+  const { t } = useTranslation("navbar");
   const dispatch = useDispatch();
   const userSelector = useSelector(({ users } : any) => users);
   const items = itemNavBar(userSelector && userSelector.currentUser ? userSelector.currentUser : undefined);
@@ -24,6 +26,10 @@ const NavBarLeft = () => {
   const handleRedirectPage = (path: string) => {
     navigate(path);
   };
+
+  const handleUploadPost = () => {
+    handleRedirectPage(config.routes.upload_post)
+  }
 
   const users: any[] = useMemo(() => {
     if ( currentUser && Array.isArray(userSelector.usersInfo) && userSelector.usersInfo.length > 0) {
@@ -40,12 +46,11 @@ const NavBarLeft = () => {
   }, [currentUser, userSelector.usersInfo]);
 
   useEffect(()=> {
-    dispatch(getUsers())
+    dispatch(getUsers());
   }, [])
 
   const handleUser = (user: any) => {
-    const data = JSON.parse(localStorage.data);
-    dispatch(getOtherUser({id: user.id, token: data.token}))
+    dispatch(getOtherUser({id: user.id}));
   }
   
   return (
@@ -60,9 +65,13 @@ const NavBarLeft = () => {
                       onClick={() => {dispatch(getUser())}} 
                   />))}
             <div className={cx('line-nav')}></div>
+            <div className={cx('upload-post')}>
+              <ButtonUpload className={cx('custom')} text={t("navbar.btn_upload")} onClick={() => {handleUploadPost()}}/>
+            </div>
+            <div className={cx('line-nav')}></div>
             {(users.length > 0) && (
                 <>
-                <h2 className={cx('title-nav-footer')}>Accounts being followed</h2>
+                <h2 className={cx('title-nav-footer')}>{t("navbar.title_footer")}</h2>
                 {
                   users.map((user, index) => (
                     <MenuItem 

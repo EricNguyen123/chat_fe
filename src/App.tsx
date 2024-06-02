@@ -7,6 +7,7 @@ import { setAuthToken } from './utils';
 import { store } from './redux/store';
 import Loading from './components/Loading';
 import { logout } from './redux/auth/actions';
+import socket from './services/socket';
 
 if (localStorage.headers) {
   const headers = JSON.parse(localStorage.headers);
@@ -26,6 +27,9 @@ function App() {
   const authSelector = useSelector(({ auth } : any) => auth);
   const checkUserLoggedIn = () => authSelector.authenticated ? true : false
   useEffect(() => {
+    socket.on('connect', () => {
+      console.log('Connected to WebSocket server');
+    });
     const checkUserLogin = async () => {
       try {
         const isLoggedIn = await checkUserLoggedIn();

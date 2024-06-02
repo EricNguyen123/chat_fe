@@ -2,7 +2,8 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import authEn from "../translations/en/auth.json";
 import headerEn from "../translations/en/header.json";
-import navbarEN from "../translations/en/navbar.json"
+import navbarEN from "../translations/en/navbar.json";
+import postEN from "../translations/en/post.json";
 
 
 // the translations
@@ -13,6 +14,7 @@ const resources = {
     auth: authEn,
     header: headerEn,
     navbar: navbarEN,
+    post: postEN,
   }
 } as const;
 

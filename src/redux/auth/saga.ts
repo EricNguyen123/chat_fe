@@ -33,8 +33,6 @@ function* loginSaga(props: any) {
 
   if (res.status === 200) {
     yield put(loginResult(res.data));
-    // setAuthToken(res.headers);
-    // localStorage.setItem("headers", JSON.stringify(res.headers));
     localStorage.setItem("data", JSON.stringify(res.data));
     yield handleRedirectPage(config.routes.home)
   } else {

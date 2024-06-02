@@ -16,10 +16,11 @@ import {
   unfollowApi,
 } from "./api";
 import types from "./type";
+import { getUserPostsApi } from "../posts/api";
+import { getUserPostsResult } from "../posts/actions";
 
 function* getUserSaga() {
-  const data = JSON.parse(localStorage.data);
-  const res: ResponseResult = yield call(getUserApi, data);
+  const res: ResponseResult = yield call(getUserApi);
   if (res.status === 200) {
     yield put(getUserResult(res.data));
   } else {
@@ -29,8 +30,7 @@ function* getUserSaga() {
 }
 
 function* getUsersSaga() {
-  const data = JSON.parse(localStorage.data);
-  const res: ResponseResult = yield call(getUsersApi, data);
+  const res: ResponseResult = yield call(getUsersApi);
   if (res.status === 200) {
     yield put(getUsersResult(res.data));
   } else {
@@ -50,10 +50,13 @@ function* getOtherUserSaga(props: any) {
 }
 
 function* followSaga(props: any) {
-  const data = JSON.parse(localStorage.data);
-  const res: ResponseResult = yield call(followingApi, { item: props.payload, ...data});
+  const { id, handleTick } = props.payload;
+  const res: ResponseResult = yield call(followingApi, { id });
   if (res.status === 200) {
+    const resPosts: ResponseResult = yield call(getUserPostsApi, { id });
     yield put(followingResult(res.data));
+    yield put(getUserPostsResult(resPosts.data));
+    handleTick && handleTick();
   } else {
     const isSuccess = false;
     yield put(followingResult(res, isSuccess));
@@ -61,10 +64,13 @@ function* followSaga(props: any) {
 }
 
 function* unfollowSaga(props: any) {
-  const data = JSON.parse(localStorage.data);
-  const res: ResponseResult = yield call(unfollowApi, { item: props.payload, ...data});
+  const { id, handleTick } = props.payload;
+  const res: ResponseResult = yield call(unfollowApi, { id });
   if (res.status === 200) {
+    const resPosts: ResponseResult = yield call(getUserPostsApi, { id });
     yield put(unfollowResult(res.data));
+    yield put(getUserPostsResult(resPosts.data))
+    handleTick && handleTick();
   } else {
     const isSuccess = false;
     yield put(unfollowResult(res, isSuccess));

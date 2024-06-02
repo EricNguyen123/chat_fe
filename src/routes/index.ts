@@ -2,6 +2,7 @@ import Register from '../pages/public/register';
 import Login from '../pages/public/login';
 import Home from '../pages/private/home';
 import Profiles from '../pages/private/profiles';
+import FormPost from '../pages/private/Post/FormPost';
 
 import { RouteType } from "../types/app";
 
@@ -38,6 +39,12 @@ const privateRoutes: Array<RouteType> = [
   {
     path: config.routes.user_id,
     component: Profiles,
+    exact: true,
+    isPublic: false
+  },
+  {
+    path: config.routes.upload_post,
+    component: FormPost,
     exact: true,
     isPublic: false
   }

@@ -1,0 +1,331 @@
+.wrapper {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--white);
+  border-radius: var(--border-radius-box);
+  position: relative;
+  margin-top: 26px;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 1px;
+    transform: scaleY(0.5);
+    background: rgba(22, 24, 35, 0.2);
+  }
+}
+
+.img-up {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  margin: 5px 10px;
+}
+
+.title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.name {
+  font-family: var(--font-family-1);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.time {
+  font-family: var(--font-family-1);
+  font-weight: 400;
+  font-size: 14px;
+  display: inline-block;
+  line-height: 28px;
+}
+
+.des {
+  height: 100%;
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  flex-direction: column;
+}
+
+.body {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .text {
+    width: 100%;
+    padding: 5px 72px;
+    font-family: var(--font-family-1);
+  }
+}
+
+.gallery {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.close-button {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  background: rgba(84, 84, 84, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  width: 40px;
+  height: 40px;
+  transition: opacity 0.3s ease 0s;
+  z-index: 100;
+  transform: translateY(0px);
+  &:hover {
+    opacity: 0.7;
+    background-color: (37, 37, 37, 0.6);
+  }
+}
+
+.centered {
+  width: 600px;
+  height: 600px;
+  padding: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-handle-follow {
+    box-sizing: border-box;
+    appearance: none;
+    display: inline-flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    border-style: solid;
+    border-width: 1px;
+    font-family: var(--tux-fontFamilyParagraph);
+    font-weight: var(--tux-fontWeightSemibold);
+    text-decoration: none;
+    cursor: pointer;
+    background-clip: padding-box;
+    font-size: var(--tux-fontSizeP4);
+    padding-inline: 11px;
+    color: var(--tux-colorConstTextInverse);
+    background-color: var(--tux-colorPrimary);
+    border-color: var(--tux-colorPrimary);
+    width: 48px;
+    height: 48px;
+    position: relative;
+    min-width: unset;
+    padding: 0px;
+    border-radius: 24px;
+    &:hover {
+      background-color: var(--tux-colorPrimary-tint-8);
+      border-color: var(--tux-colorPrimary-tint-8);
+    }
+}
+
+.btn-handle-followed {
+    box-sizing: border-box;
+    appearance: none;
+    display: inline-flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    border-style: solid;
+    border-width: 1px;
+    font-family: var(--tux-fontFamilyParagraph);
+    font-weight: var(--tux-fontWeightSemibold);
+    text-decoration: none;
+    cursor: pointer;
+    background-clip: padding-box;
+    font-size: var(--tux-fontSizeP4);
+    padding-inline: 11px;
+    color: var(--tux-colorTextPrimary);
+    background-color: var(--tux-colorBGSecondary);
+    border-color: var(--tux-colorLineSecondary);
+    width: 48px;
+    height: 48px;
+    position: relative;
+    min-width: unset;
+    padding: 0px;
+    border-radius: 24px;
+    &:hover {
+      background-color: var(--tux-colorBGSecondary-tint-4);
+      border-color: var(--tux-colorLinePrimary);
+    }
+
+}
+
+.icon-plus-follow, .icon-plus-followed {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    opacity: 1;
+    overflow: hidden;
+    gap: 4px;
+}
+
+.svg, .svg-tick {
+  height: 1em;
+  width: 1em;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.svg-tick {
+  fill: rgb(254, 44, 85);
+}
+
+.btn-handle {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0px;
+    position: relative;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    cursor: pointer;
+    flex-direction: column;
+}
+
+.btn-icon {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 0px;
+    border-radius: 50%;
+    transition: all 200ms ease-in-out 0s;
+    width: 48px;
+    height: 48px;
+    background-color: rgba(22, 24, 35, 0.06);
+    margin-top: 8px;
+    margin-bottom: 6px;
+}
+
+.react {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: 3px 72px;
+  margin-top: 5px;
+}
+
+.btn-foot-post {
+  margin: 5px 10px;
+}
+
+.comment {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.box-comment {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.list-comment {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  padding: 3px 72px;
+}
+
+.btn-control {
+  position: absolute;
+  right: 72px;
+  cursor: pointer;
+}
+
+.icon-more {
+  width: 80%;
+  height: 80%;
+  margin: auto;
+}
+
+.edit-viewer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  background-color: rgba(22, 24, 35, 0.6);
+  .box-edit {
+    width: max-content;
+    background-color: var(--white);
+    padding: 50px;
+    border-radius: var(--border-radius-box);
+    .custom-form-edit {
+      margin: auto !important;
+      background-color: var(--white);
+    }
+  }
+}
+
+.show-more {
+  background: none;
+  border: none;
+  margin-top: 5px;
+  color: rgba(22, 24, 35, 0.5);
+  font-family: var(--font-family-1);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  &:hover {
+    text-decoration: underline;
+  }
+}

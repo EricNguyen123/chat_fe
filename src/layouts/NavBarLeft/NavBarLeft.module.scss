@@ -26,3 +26,12 @@
   line-height: 18px;
   margin-top: 16px;
 }
+
+.custom {
+  width: 90%;
+  margin: 5px auto;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(22, 24, 35, 0.03);
+  }
+}

@@ -9,6 +9,7 @@ interface Props {
     height?: string;
     borderRadius?: string;
     avatar?: any;
+    fill?: any;
   }
 
 export const UploadIcon: React.FC<Props> = ({ width = '3.2rem', height = '3.2rem', className }) => (
@@ -230,5 +231,185 @@ export const UnFollow: React.FC<Props> = ({ width = '20px', height = '20px', cla
         fill="currentColor" 
         xmlns="http://www.w3.org/2000/svg">
             <path fillRule="evenodd" clipRule="evenodd" d="M13.0001 13C13.0001 9.68629 15.6864 7 19.0001 7C22.3139 7 25.0001 9.68629 25.0001 13C25.0001 16.3137 22.3139 19 19.0001 19C15.6864 19 13.0001 16.3137 13.0001 13ZM19.0001 3C13.4773 3 9.00015 7.47715 9.00015 13C9.00015 18.5228 13.4773 23 19.0001 23C24.523 23 29.0001 18.5228 29.0001 13C29.0001 7.47715 24.523 3 19.0001 3ZM5.19435 40.9681C6.70152 35.5144 10.0886 32.2352 13.9162 30.738C17.7125 29.2531 22.0358 29.4832 25.6064 31.2486C26.1015 31.4934 26.7131 31.338 26.9931 30.8619L28.0072 29.1381C28.2872 28.662 28.1294 28.0465 27.6384 27.7937C23.0156 25.4139 17.4034 25.0789 12.4591 27.0129C7.37426 29.0018 3.09339 33.3505 1.2883 40.0887C1.14539 40.6222 1.48573 41.1592 2.02454 41.2805L3.97575 41.7195C4.51457 41.8408 5.04724 41.5004 5.19435 40.9681ZM44.7074 30.1212C45.0979 29.7307 45.0979 29.0975 44.7074 28.707L43.2932 27.2928C42.9026 26.9023 42.2695 26.9023 41.8789 27.2928L30.0003 39.1715L25.1216 34.2928C24.7311 33.9023 24.0979 33.9023 23.7074 34.2928L22.2932 35.707C21.9026 36.0975 21.9026 36.7307 22.2932 37.1212L28.586 43.4141C29.3671 44.1952 30.6334 44.1952 31.4145 43.4141L44.7074 30.1212Z"></path>
+    </svg>
+)
+
+export const UploadImage: React.FC<Props> = ({ width = '20px', height = '80px', fill, className}) => (
+    <svg 
+        height={height}
+        fill={fill}
+        className={className}
+        xmlns="http://www.w3.org/2000/svg" 
+        viewBox="0 0 24 24">
+            <g strokeWidth="0" id="SVGRepo_bgCarrier"></g>
+            <g 
+                strokeLinejoin="round" 
+                strokeLinecap="round" 
+                id="SVGRepo_tracerCarrier"></g>
+            <g id="SVGRepo_iconCarrier"> 
+                <path fill="" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" clipRule="evenodd" fillRule="evenodd"></path> 
+            </g>
+    </svg>
+)
+
+export const ButtonFr: React.FC<Props> = ({ width = '20px', height = '20px', className }) =>(
+    <svg
+        width={width}
+        height={height}
+        className={className}
+        viewBox="0 0 48 48" 
+        fill="currentColor" 
+        xmlns="http://www.w3.org/2000/svg">
+        <path fillRule="evenodd" clipRule="evenodd" d="M18.9999 7C15.6862 7 12.9999 9.68629 12.9999 13C12.9999 16.3137 15.6862 19 18.9999 19C22.3136 19 24.9999 16.3137 24.9999 13C24.9999 9.68629 22.3136 7 18.9999 7ZM8.9999 13C8.9999 7.47715 13.4771 3 18.9999 3C24.5228 3 28.9999 7.47715 28.9999 13C28.9999 18.5228 24.5228 23 18.9999 23C13.4771 23 8.9999 18.5228 8.9999 13ZM13.9159 30.738C10.0883 32.2352 6.70127 35.5144 5.19411 40.9681C5.047 41.5004 4.51432 41.8408 3.97551 41.7195L2.0243 41.2805C1.48549 41.1592 1.14514 40.6222 1.28805 40.0887C3.09315 33.3505 7.37401 29.0018 12.4589 27.0129C17.4031 25.0789 23.0153 25.4139 27.6381 27.7937C28.1292 28.0465 28.287 28.662 28.0069 29.1381L26.9929 30.8619C26.7129 31.338 26.1013 31.4934 25.6062 31.2486C22.0356 29.4832 17.7123 29.2531 13.9159 30.738ZM39.832 28.4453C40.2915 28.1389 40.9124 28.2631 41.2187 28.7227L44.664 33.8906C45.0731 34.5043 45.1113 35.2934 44.7633 35.9437C44.4152 36.594 43.7375 37 42.9999 37H27.9999C27.4476 37 26.9999 36.5523 26.9999 36V34C26.9999 33.4477 27.4476 33 27.9999 33H39.2629L37.8905 30.9415C37.5842 30.4819 37.7083 29.8611 38.1679 29.5547L39.832 28.4453ZM27.2366 40.0563C27.5846 39.406 28.2623 39 28.9999 39H43.9999C44.5522 39 44.9999 39.4477 44.9999 40V42C44.9999 42.5523 44.5522 43 43.9999 43H32.7369L34.1093 45.0585C34.4157 45.5181 34.2915 46.1389 33.832 46.4453L32.1679 47.5547C31.7083 47.8611 31.0875 47.7369 30.7811 47.2774L27.3358 42.1094C26.9267 41.4957 26.8885 40.7066 27.2366 40.0563Z"></path>
+    </svg>
+)
+
+export const PlusImport: React.FC<Props> = ({width = '1em', height = '1em', className}) => (
+    <svg 
+        className={className} 
+        width={width} 
+        height={height} 
+        viewBox="0 0 16 16" 
+        fill="currentColor" 
+        xmlns="http://www.w3.org/2000/svg">
+        <path fillRule="evenodd" clipRule="evenodd" d="M8 2.5C7.58579 2.5 7.25 2.83579 7.25 3.25V7.25H3.25C2.83579 7.25 2.5 7.58579 2.5 8C2.5 8.41421 2.83579 8.75 3.25 8.75H7.25V12.75C7.25 13.1642 7.58579 13.5 8 13.5C8.41421 13.5 8.75 13.1642 8.75 12.75V8.75H12.75C13.1642 8.75 13.5 8.41421 13.5 8C13.5 7.58579 13.1642 7.25 12.75 7.25H8.75V3.25C8.75 2.83579 8.41421 2.5 8 2.5Z"></path>
+    </svg>
+)
+
+export const CloseButton: React.FC<Props> = ({width = '18px', height = '18px', className}) => ( 
+    <svg
+        className={className} 
+        width={width} 
+        height={height} 
+        viewBox="0 0 9 10" 
+        fill="#fff" 
+        xmlns="http://www.w3.org/2000/svg">
+        <path d="M1.35299 0.792837L4.49961 3.93944L7.64545 0.792566C7.8407 0.597249 8.15733 0.597223 8.35262 0.792508L8.70669 1.14658C8.90195 1.34184 8.90195 1.65842 8.70669 1.85368L5.56027 5.0001L8.70672 8.14655C8.90198 8.34181 8.90198 8.65839 8.70672 8.85366L8.35316 9.20721C8.1579 9.40247 7.84132 9.40247 7.64606 9.20721L4.49961 6.06076L1.35319 9.20719C1.15793 9.40245 0.841345 9.40245 0.646083 9.20719L0.292629 8.85373C0.0973708 8.65847 0.0973653 8.3419 0.292617 8.14664L3.43895 5.0001L0.292432 1.85357C0.0972034 1.65834 0.0971656 1.34182 0.292347 1.14655L0.645801 0.792924C0.841049 0.597582 1.1577 0.597543 1.35299 0.792837Z"></path>
+    </svg>
+)
+
+export const PlusFollow: React.FC<Props> = ({width = '1em', height = '1em', className}) => (
+    <svg 
+        fill="currentColor" 
+        viewBox="0 0 48 48" 
+        xmlns="http://www.w3.org/2000/svg" 
+        className={className} 
+        width={width} 
+        height={height} >
+        <path d="M26 7a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v15H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h15v15a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V26h15a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H26V7Z"></path>
+    </svg>
+)
+
+export const IconHeart: React.FC<Props> = ({width = '24px', height = '24px', className}) => (
+    <svg 
+        className={className} 
+        width={width} 
+        height={height}
+        viewBox="0 0 24 24" 
+        fill="currentColor" 
+        xmlns="http://www.w3.org/2000/svg">
+            <g clipPath="url(#HeartFill_clip0)">
+                <g filter="url(#HeartFill_filter0_d)">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M7.5 2.25C10.5 2.25 12 4.25 12 4.25C12 4.25 13.5 2.25 16.5 2.25C20 2.25 22.5 4.99999 22.5 8.5C22.5 12.5 19.2311 16.0657 16.25 18.75C14.4095 20.4072 13 21.5 12 21.5C11 21.5 9.55051 20.3989 7.75 18.75C4.81949 16.0662 1.5 12.5 1.5 8.5C1.5 4.99999 4 2.25 7.5 2.25Z"></path>
+                </g>
+                <path fillRule="evenodd" clipRule="evenodd" d="M2.40179 12.1998C3.58902 14.6966 5.7592 16.9269 7.74989 18.75C9.5504 20.3989 10.9999 21.5 11.9999 21.5C12.9999 21.5 14.4094 20.4072 16.2499 18.75C19.231 16.0657 22.4999 12.5 22.4999 8.49997C22.4999 8.41258 22.4983 8.32566 22.4952 8.23923C20.5671 13.6619 13.6787 18.5 11.75 18.5C10.3127 18.5 5.61087 15.8131 2.40179 12.1998Z" fillOpacity="0.03"></path>
+            </g>
+            <defs>
+                <filter id="HeartFill_filter0_d" x="-0.9" y="1.05" width="25.8" height="24.05" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB"><feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset dy="1.2"></feOffset><feGaussianBlur stdDeviation="1.2"></feGaussianBlur><feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0"></feColorMatrix><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"></feBlend><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"></feBlend></filter><clipPath id="HeartFill_clip0"><rect width="24" height="24" fill="white"></rect></clipPath>
+            </defs>
+        </svg>
+)
+
+export const IconCmt: React.FC<Props> = ({width = '24px', height = '24px', className}) => (
+    <svg 
+        viewBox="0 0 48 48" 
+        xmlns="http://www.w3.org/2000/svg" 
+        className={className} 
+        width={width} 
+        height={height}
+        fill="currentColor">
+            <path fillRule="evenodd" d="M2 21.5c0-10.22 9.88-18 22-18s22 7.78 22 18c0 5.63-3.19 10.74-7.32 14.8a43.6 43.6 0 0 1-14.14 9.1A1.5 1.5 0 0 1 22.5 44v-5.04C11.13 38.4 2 31.34 2 21.5M14 25a3 3 0 1 0 0-6 3 3 0 0 0 0 6m10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6m13-3a3 3 0 1 1-6 0 3 3 0 0 1 6 0" clipRule="evenodd"></path>
+        </svg>
+)
+
+export const IconSend: React.FC<Props> = ({width = '24px', height = '24px', className}) => (
+    <svg 
+        className={className} 
+        width={width} 
+        height={height} 
+        xmlns="http://www.w3.org/2000/svg" 
+        fill="none" 
+        viewBox="0 0 664 663">
+      <path
+        fill="none"
+        d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
+      ></path>
+      <path
+        strokeLinejoin="round"
+        strokeLinecap="round"
+        strokeWidth="33.67"
+        stroke="#6c6c6c"
+        d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
+      ></path>
+    </svg>
+)
+
+export const LikeCommentIcon: React.FC<Props> = ({width = '20px', height = '20px', className}) => (
+    <svg 
+        className={className} 
+        width={width} 
+        height={height} 
+        viewBox="0 0 48 48" 
+        fill="currentColor" 
+        xmlns="http://www.w3.org/2000/svg">
+        <path fillRule="evenodd" clipRule="evenodd" d="M24 9.01703C19.0025 3.74266 11.4674 3.736 6.67302 8.56049C1.77566 13.4886 1.77566 21.4735 6.67302 26.4016L22.5814 42.4098C22.9568 42.7876 23.4674 43 24 43C24.5326 43 25.0432 42.7876 25.4186 42.4098L41.327 26.4016C46.2243 21.4735 46.2243 13.4886 41.327 8.56049C36.5326 3.736 28.9975 3.74266 24 9.01703ZM21.4938 12.2118C17.9849 8.07195 12.7825 8.08727 9.51028 11.3801C6.16324 14.7481 6.16324 20.214 9.51028 23.582L24 38.1627L38.4897 23.582C41.8368 20.214 41.8368 14.7481 38.4897 11.3801C35.2175 8.08727 30.0151 8.07195 26.5062 12.2118L26.455 12.2722L25.4186 13.3151C25.0432 13.6929 24.5326 13.9053 24 13.9053C23.4674 13.9053 22.9568 13.6929 22.5814 13.3151L21.545 12.2722L21.4938 12.2118Z"></path>
+    </svg>
+)
+
+export const LikeCommentActiveIcon: React.FC<Props> = ({width = '20px', height = '20px', className}) => (
+    <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        className={className} 
+        width={width} 
+        height={height} 
+        fill="rgba(254, 44, 85, 1)">
+            <g fillRule="evenodd" clipPath="url(#heart-fill-52d919d9_a)" clipRule="evenodd"><path d="M7.5 2.25c3 0 4.5 2 4.5 2s1.5-2 4.5-2c3.5 0 6 2.75 6 6.25 0 4-3.269 7.566-6.25 10.25C14.41 20.407 13 21.5 12 21.5s-2.45-1.101-4.25-2.75C4.82 16.066 1.5 12.5 1.5 8.5c0-3.5 2.5-6.25 6-6.25"></path><path fill="black" fillOpacity=".03" d="M2.402 12.2c1.187 2.497 3.357 4.727 5.348 6.55C9.55 20.399 11 21.5 12 21.5s2.41-1.093 4.25-2.75c2.98-2.684 6.25-6.25 6.25-10.25q0-.13-.005-.26C20.567 13.661 13.68 18.5 11.75 18.5c-1.437 0-6.14-2.687-9.348-6.3"></path></g><defs><clipPath id="heart-fill-52d919d9_a"><path fill="white" d="M0 0h24v24H0z"></path></clipPath></defs>
+        </svg>
+
+)
+
+export const MoreIcon: React.FC<Props> = ({width = '24px', height = '24px', className}) => (
+    <svg 
+        className={className} 
+        width={width} 
+        height={height} 
+        viewBox="0 0 48 48" 
+        fill="currentColor" 
+        xmlns="http://www.w3.org/2000/svg">
+        <path fillRule="evenodd" clipRule="evenodd" d="M4 24C4 21.7909 5.79086 20 8 20C10.2091 20 12 21.7909 12 24C12 26.2091 10.2091 28 8 28C5.79086 28 4 26.2091 4 24ZM20 24C20 21.7909 21.7909 20 24 20C26.2091 20 28 21.7909 28 24C28 26.2091 26.2091 28 24 28C21.7909 28 20 26.2091 20 24ZM36 24C36 21.7909 37.7909 20 40 20C42.2091 20 44 21.7909 44 24C44 26.2091 42.2091 28 40 28C37.7909 28 36 26.2091 36 24Z"></path>
+    </svg>
+)
+
+export const DeleteIcon: React.FC<Props> = ({ width = '1em', height = '1em', className}) => (
+    <svg 
+        fill="currentColor" 
+        viewBox="0 0 48 48" 
+        xmlns="http://www.w3.org/2000/svg" 
+        className={className} 
+        width={width} 
+        height={height}>
+        <path d="M32 6v2h11a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2.68L38.78 37c-.2 3.17-.29 4.76-.97 5.96a6 6 0 0 1-2.6 2.45c-1.24.6-2.83.6-6 .6H18.8c-3.18 0-4.77 0-6.01-.6a6 6 0 0 1-2.6-2.45c-.68-1.2-.78-2.79-.97-5.96L7.68 12H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h11V6a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5ZM21 5a1 1 0 0 0-1 1v2h8V6a1 1 0 0 0-1-1h-6Zm-2.19 13.5a1 1 0 0 0-1 1v15a1 1 0 0 0 1 1h2.13a1 1 0 0 0 1-1v-15a1 1 0 0 0-1-1H18.8Zm7.25 1v15a1 1 0 0 0 1 1h2.13a1 1 0 0 0 1-1v-15a1 1 0 0 0-1-1h-2.13a1 1 0 0 0-1 1Z"></path>
+    </svg>
+)
+
+export const TickIcon: React.FC<Props> = ({ width = '1em', height = '1em', className}) => (
+    <svg 
+        fill="currentColor" 
+        viewBox="0 0 48 48" 
+        xmlns="http://www.w3.org/2000/svg" 
+        className={className} 
+        width={width} 
+        height={height}>
+        <path d="m19.71 36.03 19.73-30.5a1 1 0 0 1 1.39-.3l2.35 1.53c.46.3.6.92.3 1.38L22.01 41.3a2.4 2.4 0 0 1-3.83.28L4.85 26.33a1 1 0 0 1 .1-1.4l2.1-1.85a1 1 0 0 1 1.42.1L19.7 36.02Z"></path>
     </svg>
 )

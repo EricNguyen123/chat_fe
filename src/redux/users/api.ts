@@ -1,41 +1,22 @@
-import Axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
+import api from '../../utils/api';
 
-export const getUserApi = (data: any): Promise<AxiosResponse> => {
-  return Axios.get("/my_acount", {
-    headers: {
-      Authorization: `Bearer ${data.token}`
-    }
-  });
+export const getUserApi = (): Promise<AxiosResponse> => {
+  return api.get("/my_acount");
 };
 
-export const getUsersApi = (data: any): Promise<AxiosResponse> => {
-  return Axios.get("/users", {
-    headers: {
-      Authorization: `Bearer ${data.token}`
-    }
-  });
+export const getUsersApi = (): Promise<AxiosResponse> => {
+  return api.get("/users");
 };
 
 export const getOtherUserApi = (data: any): Promise<AxiosResponse> => {
-  return Axios.get(`/user/${data.id}`, {
-    headers: {
-      Authorization: `Bearer ${data.token}`
-    }
-  });
+  return api.get(`/user/${data.id}`);
 };
 
 export const followingApi = (data: any): Promise<AxiosResponse> => {
-  return Axios.get(`/relationships/follow/${data.item.id}`, {
-    headers: {
-      Authorization: `Bearer ${data.token}`
-    }
-  });
+  return api.get(`/relationships/follow/${data.id}`);
 };
 
 export const unfollowApi = (data: any): Promise<AxiosResponse> => {
-  return Axios.get(`/relationships/unfollow/${data.item.id}`, {
-    headers: {
-      Authorization: `Bearer ${data.token}`
-    }
-  });
+  return api.get(`/relationships/unfollow/${data.id}`);
 };

@@ -1,28 +1,25 @@
 import classNames from 'classnames/bind';
 import styles from './BoxInfo.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { EditIcon, UnFollow } from '../../../../components/Icons';
 import ButtonCustom from '../../../../components/ButtonCustom';
 import { useEffect, useState } from 'react';
-import { following, unfollow } from '../../../../redux/users/actions';
+import { following, getOtherUser, unfollow } from '../../../../redux/users/actions';
 import { useTranslation } from 'react-i18next';
 import ImageUpload from '../../../../components/ImageUpload';
 import Image from '../../../../components/Image';
+import { useParams } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 const BoxInfo = () => {
   const dispatch = useDispatch();
-  let userSelector = useSelector(({ users } : any) => users);
+  const userSelector = useSelector(({ users } : any) => users);
   const media = useSelector(({ imageUpload } : any) => imageUpload);
   const [image, setImage] = useState("");
   const { t } = useTranslation("header");
   const data = JSON.parse(localStorage.data);
-  const navigate = useNavigate();
-  const handleRedirectPage = (path: string) => {
-    navigate(path);
-  };
+  const { id } = useParams<{ id: string }>();
 
   const statusInfos = [
     {
@@ -42,6 +39,10 @@ const BoxInfo = () => {
   ]
 
   useEffect(() => {
+    dispatch(getOtherUser({ id: id }))
+  }, [userSelector.status])
+
+  useEffect(() => {
     if (userSelector && userSelector.userInfo) {
       setImage(process.env.REACT_APP_BASE_URL + userSelector.userInfo.imagAvatar)
     }
@@ -55,14 +56,7 @@ const BoxInfo = () => {
   const handleUnFollow = () => {
     dispatch(unfollow({id: userSelector.userInfo.id}))
   }
-  
-  if(userSelector.userInfo !== undefined) {
-    localStorage.setItem("userInfoCurrent", JSON.stringify(userSelector))
-  }
-  else if (localStorage.userInfoCurrent) {
-    userSelector = JSON.parse(localStorage.userInfoCurrent);
-  }
-  
+
   return (
     <div className={cx('wrapper')}>
       {/* <Loading isLoading={userSelector.loading}/> */}
@@ -97,7 +91,7 @@ const BoxInfo = () => {
                   (<ButtonCustom size={"136-36-4"}>
                     <EditIcon className={cx('edit-icon')}/>
                     <span className={cx('font-name')}>Edit Profiles</span>
-                  </ButtonCustom>) : userSelector.status || userSelector.isFollowing ? 
+                  </ButtonCustom>) : userSelector.userInfo && userSelector.userInfo.isFollowing ? 
                   (<div className={cx('box-btn-fl')}>
                     <ButtonCustom size={"164-36-4"}>
                       <span className={cx('font-name')}>Message</span>

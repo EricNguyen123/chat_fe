@@ -5,8 +5,9 @@ import reportWebVitals from './reportWebVitals';
 import GlobalStyles from '../src/components/GlobalStyles';
 import "./translations/i18n";
 import Axios from "axios";
-import { store } from "./redux/store";
+import { store, persistor } from "./redux/store";
 import { Provider } from "react-redux";
+import { PersistGate } from 'redux-persist/integration/react';
 
 Axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 const root = ReactDOM.createRoot(
@@ -15,9 +16,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
      <Provider store={store}>
-      <GlobalStyles>
-        <App />
-      </GlobalStyles>
+      <PersistGate loading={null} persistor={persistor}>
+        <GlobalStyles>
+          <App />
+        </GlobalStyles>
+      </PersistGate>
      </Provider>
    
   </React.StrictMode>

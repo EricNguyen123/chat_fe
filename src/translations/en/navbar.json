@@ -3,6 +3,8 @@
     "home": "For You",
     "following": "Following",
     "live": "LIVE",
-    "profile": "Profiles"
+    "profile": "Profiles",
+    "title_footer": "Accounts being followed",
+    "btn_upload": "Up Post"
   }
 }

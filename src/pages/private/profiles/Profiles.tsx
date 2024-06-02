@@ -1,29 +1,24 @@
 import classNames from 'classnames/bind';
 import styles from './Profiles.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Loading from '../../../components/Loading';
-import { Link, useNavigate } from 'react-router-dom';
-import config from '../../../config';
+import { useParams } from 'react-router-dom';
 import BoxInfo from './box-info';
+import Post from '../Post';
 
 const cx = classNames.bind(styles);
 
 const Profiles = () => {
-  const dispatch = useDispatch();
-  const authSelector = useSelector(({ auth } : any) => auth);
-
-  const navigate = useNavigate();
-  const handleRedirectPage = (path: string) => {
-    navigate(path);
-  };
-
-  
-  
+  const postSelector = useSelector(({ posts }: any) => posts);
+  const { id } = useParams<{ id: string }>();
 
   return (
     <div className={cx('wrapper')}>
-      <Loading isLoading={authSelector.loading}/>
+      <Loading isLoading={postSelector.loading}/>
       <BoxInfo/>
+      <div className={cx('inner')}>
+        <Post id={id}/>
+      </div>
     </div>
   );
 };

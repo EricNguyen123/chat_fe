@@ -8,6 +8,11 @@ export type AuthState = {
   loading: boolean;
   userInfo: any | undefined;
 };
+export type PostState = {
+  loading: boolean;
+  post: any | undefined;
+  posts: any | undefined;
+}
 
 export type UploadFile = {
   loading: boolean;

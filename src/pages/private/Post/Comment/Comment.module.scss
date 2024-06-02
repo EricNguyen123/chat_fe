@@ -1,0 +1,164 @@
+/* Comment.module.scss */
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+  margin: 10px 0px;
+}
+
+.form-box {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px;
+  background-color: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.item-text {
+  width: 82%;
+  height: 48px;
+}
+
+.item-img {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-img {
+  position: relative;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-img {
+  width: 100px; 
+  height: 100px;
+  object-fit: cover;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.box-preview {
+  width: max-content;
+  max-width: 296px;
+  height: max-content;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin: 5px;
+  padding: 10px 25px 5px 5px;
+  position: absolute;
+  right: 0px;
+  bottom: 60px;
+  border: 1px solid rgba(22, 24, 35, 0.12);
+  border-radius: 5px;
+  background-color: var(--white);
+  overflow-y: scroll;
+}
+
+.svg {
+  width: 28px;
+  height: 28px;
+}
+
+.label {
+  display: block;
+  font-weight: bold;
+  color: #333;
+}
+
+.body-text {
+  width: 100%;
+  height: 100%;
+  padding: 3px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+.custom-file-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+}
+
+.input-img {
+  display: none;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.submit {
+  width: 48px;
+  height: 48px;
+  padding: 10px;
+  background-color: var(--white);
+  border: none;
+  border-radius: 50%;
+  color: var(--white);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(22, 24, 35, 0.06);
+  }
+}
+
+.icon-send {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.submit:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.icon-close {
+  width: 10px;
+  height: 10px;
+}
+
+
+.close-button {
+  position: absolute;
+  z-index: 100;
+  top: -160px;
+  right: -5px;
+  background: var(--tux-colorPrimary);
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  color: var(--white);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

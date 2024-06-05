@@ -1,6 +1,7 @@
 @import 'normalize.css';
 
 :root {
+    --search-button-width: 50px;
     --border-radius-box: 5px;
     --width-navbar: 286px;
     --height-header: 68px;
@@ -35,6 +36,7 @@
     --forest-green: #3f504e;
     --ink: #53505b;
     --umber: #905647;
+    --text-color: rgb(22, 24, 35);
 
     --tux-colorPrimary: rgba(254, 44, 85, 1);
     --tux-colorPrimary-tint-4: rgba(244, 42, 82, 1);
@@ -114,7 +116,11 @@
     --tux-colorConstLineInverse2: rgba(255, 255, 255, 0.12);
     --tux-colorSDPrimary: rgba(0, 0, 0, 0.8);
     --tux-gradientLive: linear-gradient(131.17deg, #ff1764 0%, #ed3495 94.15%);
-    --tux-gradientVideoCoverOverlay: linear-gradient( 180deg, rgba(22, 24, 35, 0.0001) 2.92%, rgba(22, 24, 35, 0.5) 98.99% );
+    --tux-gradientVideoCoverOverlay: linear-gradient(
+        180deg,
+        rgba(22, 24, 35, 0.0001) 2.92%,
+        rgba(22, 24, 35, 0.5) 98.99%
+    );
     --tux-colorAssistColorYellow: rgba(250, 206, 21, 1);
 
     --font-family: 'TikTokDisplayFont-Bold', sans-serif;
@@ -129,6 +135,27 @@
 
 html {
     font-size: 62.5%;
+    scrollbar-width: thin;
+    scrollbar-color: #e9e9e9 #f1f1f1;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+        background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: transparent;
+    }
+
+    &:hover {
+        &::-webkit-scrollbar-thumb {
+            background: #e9e9e9;
+        }
+    }
 }
 
 body {
@@ -176,4 +203,3 @@ button {
     src: url('../../assets/fonts/TikTokFont-Semibold.woff2');
     font-weight: 400;
 }
-

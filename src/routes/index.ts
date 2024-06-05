@@ -7,6 +7,7 @@ import FormPost from '../pages/private/Post/FormPost';
 import { RouteType } from "../types/app";
 
 import config from '../config';
+import Messages from '../pages/private/messages';
 
 const publicRoutes: Array<RouteType> = [
   {
@@ -45,6 +46,12 @@ const privateRoutes: Array<RouteType> = [
   {
     path: config.routes.upload_post,
     component: FormPost,
+    exact: true,
+    isPublic: false
+  },
+  {
+    path: config.routes.messages,
+    component: Messages,
     exact: true,
     isPublic: false
   }

@@ -24,6 +24,8 @@ import { following, unfollow } from '../../../../redux/users/actions';
 import PostModal from '../../../../components/PostModal';
 import Loading from '../../../../components/Loading';
 import { formatDate } from '../../../../utils/formatDate';
+import Reacts from '../../../../components/Reacts';
+import { createReact, deleteReact } from '../../../../redux/reactIcon/actions';
 
 const cx = classNames.bind(styles);
 
@@ -38,10 +40,17 @@ interface User {
   id: number;
 }
 
+interface React {
+  action: number;
+  id?: number;
+  userId: number;
+}
+
 interface PostData {
   id: string;
   avatarMedia?: { mediaUrl: string };
   MediaItems: MediaItem[];
+  Reacts: React[];
   User: User;
   body: string;
   updatedAt: string;
@@ -54,6 +63,8 @@ interface Props {
   data: PostData;
   modal?: boolean;
 }
+
+const MAX_INITIAL_COMMENTS = parseInt(process.env.REACT_APP_MAX_INITIAL_COMMENTS ?? '0', 10);
 
 const ItemPost: React.FC<Props> = ({ data, modal = false }) => {
   const dispatch = useDispatch();
@@ -74,7 +85,6 @@ const ItemPost: React.FC<Props> = ({ data, modal = false }) => {
   const dataUser = localStorage.data ? JSON.parse(localStorage.data) : undefined;
   const currentUserId = dataUser ? dataUser.id : undefined;
   const [newData, setNewData] = useState<PostData>(data);
-  
 
   useEffect(() => {
     if (newData.avatarMedia) {
@@ -167,6 +177,33 @@ const ItemPost: React.FC<Props> = ({ data, modal = false }) => {
 
   const handleConfirmDelete = () => {dispatch(deletePost({ id: newData.id }))}
 
+  const handlePostReactions = (action: number, postId: number, userId: number) => {
+    dispatch(createReact({ action, postId, userId }))
+  }
+
+  const handleDeleteReactions = (postId: number, userId: number) => {
+    dispatch(deleteReact({ postId, userId }))
+  }
+
+  const hasUserReacted = (postId: number, userId: number) => {
+    return postSelector.posts.some((post: any) =>
+      parseInt(post.id, 10) === postId &&
+      post.Reacts.some((react: any) => parseInt(react.userId, 10) === userId)
+    );
+  };
+
+  const handleOnReactions = () => {
+    if (hasUserReacted(parseInt(data.id, 10), currentUserId)) {
+      handleDeleteReactions(parseInt(data.id, 10), currentUserId);
+    } else {
+      handlePostReactions(0, parseInt(data.id, 10), currentUserId);
+    }
+  };
+
+  const handleClickIcon = (i: number) => {
+      handlePostReactions(i, parseInt(data.id, 10), currentUserId);
+  };
+
   const moreMenu = [
     { icon: <EditIcon className={cx('icon-more')}/>, title: t("comment.btn_edit"), action: onEdit, rule: checkUser },
     { icon: <DeleteIcon className={cx('icon-more')}/>, title: t("comment.btn_delete"), action: onDelete, rule: checkUser },
@@ -174,7 +211,7 @@ const ItemPost: React.FC<Props> = ({ data, modal = false }) => {
 
   return (
     <div className={cx('wrapper')}>
-      <Loading isLoading={postSelector.loading}/>
+      {/* <Loading isLoading={postSelector.loading}/> */}
       <div className={cx('title')}>
         <div className={cx('img-avatar')}>
           <Image className={cx('img-up')} src={image} alt=''/> 
@@ -206,11 +243,13 @@ const ItemPost: React.FC<Props> = ({ data, modal = false }) => {
           </div>)}
         </div>)}
         <div className={cx('btn-react', 'btn-foot-post')}>
-          <div className={cx('btn-handle-react', 'btn-handle')}>
-            <span className={cx('heart-icon', 'btn-icon')}>
-              <IconHeart/>
-            </span>
-          </div>
+          <Reacts 
+            rootIcon={<IconHeart/>}
+            postId={parseInt(data.id, 10)} 
+            reacts={data.Reacts} 
+            userId={currentUserId} 
+            onClick={() => {handleOnReactions()}}
+            handleClickIcon={handleClickIcon}/>
         </div>
         <div className={cx('btn-comment', 'btn-foot-post')} onClick={handleViewerComment}>
           <div className={cx('btn-handle-cmt', 'btn-handle')}>
@@ -218,6 +257,9 @@ const ItemPost: React.FC<Props> = ({ data, modal = false }) => {
               <IconCmt/>
             </span>
           </div>
+        </div>
+        <div className={cx('note-liked')}>
+          <span className={cx('text-liked')}>{data.Reacts.length > 0 && data.Reacts.length} {data.Reacts.length > 0 && t("noti.liked")} </span>
         </div>
       </div>
       <div className={cx('comment')}>
@@ -228,7 +270,7 @@ const ItemPost: React.FC<Props> = ({ data, modal = false }) => {
           <CommentSection data={newData.children} modal={isModalOpen || modal} />
           {newData.children.length > 0 && !modal && !isModalOpen &&
             (<button onClick={openModal} className={cx('show-more')}>
-              {t("comment.btn_more_comment")}
+              {t("comment.btn_more_comment")} {newData.children.length > MAX_INITIAL_COMMENTS && newData.children.length - MAX_INITIAL_COMMENTS}
             </button>)}
         </div>
       </div>

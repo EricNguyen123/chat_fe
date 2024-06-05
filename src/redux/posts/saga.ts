@@ -7,7 +7,8 @@ import {
   postPostResult,
   updatePostResult,
   deletePostResult,
-  getUserPostsResult
+  getUserPostsResult,
+  getPosts
 } from "./actions";
 import {
   getPostApi,
@@ -105,9 +106,8 @@ function* updatePostSaga(props: any) {
 function* deletePostsSaga(props: any) {
   const res: ResponseResult = yield call(deletePostsApi, { postId: props.payload.id });
   if (res.status === 200) {
-    const resGet: ResponseResult = yield call(getPostsApi);
     yield put(deletePostResult(res.data));
-    yield put(getPostsResult(resGet.data));
+    yield put(getPosts());
   } else {
     const isSuccess = false;
     yield put(deletePostResult(res, isSuccess));

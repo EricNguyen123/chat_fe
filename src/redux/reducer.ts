@@ -9,6 +9,7 @@ import authReducer from "./auth/reducer";
 import userReducer from "./users/reducer";
 import imageUploadReducer from "./image-upload/reducer";
 import postsReducer from "./posts/reducer";
+import reactsReducer from "./reactIcon/reducer";
 
 import storage from "redux-persist/es/storage";
 import persistReducer from "redux-persist/es/persistReducer";
@@ -21,6 +22,7 @@ const rootPersistConfig = {
     "users",
     "imageUpload",
     "posts",
+    "reacts",
   ],
 };
 
@@ -35,6 +37,7 @@ const reducers = combineReducers({
   users: userReducer,
   imageUpload: imageUploadReducer,
   posts: postsReducer,
+  reacts: reactsReducer,
 });
 
 type RootState = ReturnType<typeof reducers>;

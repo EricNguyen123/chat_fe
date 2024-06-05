@@ -2,9 +2,10 @@
   "navbar": {
     "home": "For You",
     "following": "Following",
-    "live": "LIVE",
+    "live": "Live",
     "profile": "Profiles",
     "title_footer": "Accounts being followed",
-    "btn_upload": "Up Post"
+    "btn_upload": "Up Post",
+    "messages": "Messages"
   }
 }

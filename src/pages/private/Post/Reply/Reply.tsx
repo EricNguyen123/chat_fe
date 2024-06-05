@@ -13,6 +13,8 @@ import { deletePost } from '../../../../redux/posts/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import Viewer from '../../../../components/Viewer';
 import { formatDate } from '../../../../utils/formatDate';
+import Reacts from '../../../../components/Reacts';
+import { createReact, deleteReact } from '../../../../redux/reactIcon/actions';
 
 const cx = classNames.bind(styles);
 
@@ -27,10 +29,17 @@ interface User {
   id: number;
 }
 
+interface React {
+  action: number;
+  id?: number;
+  userId: number;
+}
+
 interface PostData {
   id: string;
   avatarMedia?: { mediaUrl: string };
   MediaItems: MediaItem[];
+  Reacts: React[];
   User: User;
   body: string;
   updatedAt: string;
@@ -50,7 +59,7 @@ interface PropsData {
   checkUser?: boolean;
 }
 
-const MAX_INITIAL_COMMENTS = 1;
+const MAX_INITIAL_COMMENTS = parseInt(process.env.REACT_APP_MAX_INITIAL_COMMENTS ?? '0', 10);
 
 const Reply: React.FC<PropsData> = ({ data }) => {
   const postSelector = useSelector(({ posts }: any) => posts);
@@ -114,6 +123,30 @@ const Reply: React.FC<PropsData> = ({ data }) => {
   const handleViewerComment = () => {setIsViewerOpenComment(!isViewerComment)}
   const handleConfirmDelete = () => {dispatch(deletePost({ id: data.id}))}
 
+  const handlePostReactions = (action: number, postId: number, userId: number) => {
+    dispatch(createReact({ action, postId, userId }))
+  }
+
+  const handleDeleteReactions = (postId: number, userId: number) => {
+    dispatch(deleteReact({ postId, userId }))
+  }
+
+  const hasUserReacted = (userId: number) => {
+    return data.Reacts.some((react: any) => parseInt(react.userId, 10) === userId)
+  };
+
+  const handleOnReactions = () => {
+    if (hasUserReacted(currentUserId)) {
+      handleDeleteReactions(parseInt(data.id, 10), currentUserId);
+    } else {
+      handlePostReactions(0, parseInt(data.id, 10), currentUserId);
+    }
+  };
+
+  const handleClickIcon = (i: number) => {
+      handlePostReactions(i, parseInt(data.id, 10), currentUserId);
+  };
+
   const images = views.map(view => ({
     original: view,
     thumbnail: view,
@@ -149,7 +182,14 @@ const Reply: React.FC<PropsData> = ({ data }) => {
             </span>
           </div>
           <div className={cx('icon-cmt')}>
-            <LikeCommentIcon className={cx('icon')} />
+            <Reacts 
+              type={'none'}
+              rootIcon={<LikeCommentIcon className={cx('icon')} />}
+              postId={parseInt(data.id, 10)} 
+              reacts={data.Reacts} 
+              userId={currentUserId} 
+              onClick={() => {handleOnReactions()}}
+              handleClickIcon={handleClickIcon}/>           
           </div>
         </div>
         <div className={cx('footer-reply')}>
@@ -208,7 +248,7 @@ const CommentSection: React.FC<Props> = ({ data, modal }) => {
       ))}
       {modal && !showAllComments && data.length > MAX_INITIAL_COMMENTS && (
         <button onClick={() => setShowAllComments(true)} className={cx('show-more')}>
-          {t("comment.btn_more_comment")} {data.length > 1 && (data.length - MAX_INITIAL_COMMENTS)}
+          {t("comment.btn_more_comment")} {data.length > MAX_INITIAL_COMMENTS && (data.length - MAX_INITIAL_COMMENTS)}
         </button>
       )}
       {showAllComments && data.length > MAX_INITIAL_COMMENTS && (

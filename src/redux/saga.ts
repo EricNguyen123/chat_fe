@@ -2,6 +2,7 @@ import authSagas from "./auth/saga";
 import usersSagas from "./users/saga";
 import imageUploadSaga from "./image-upload/saga";
 import postsSagas from "./posts/saga";
+import reactsSaga from "./reactIcon/saga";
 
 import { all } from "redux-saga/effects";
 
@@ -12,5 +13,6 @@ export default function* rootSaga() {
     usersSagas(),
     imageUploadSaga(),
     postsSagas(),
+    reactsSaga(),
   ]);
 }

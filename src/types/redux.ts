@@ -8,10 +8,17 @@ export type AuthState = {
   loading: boolean;
   userInfo: any | undefined;
 };
+
 export type PostState = {
   loading: boolean;
   post: any | undefined;
   posts: any | undefined;
+}
+
+export type ReactState = {
+  loading: boolean;
+  react: any | undefined;
+  reacts: any | undefined;
 }
 
 export type UploadFile = {

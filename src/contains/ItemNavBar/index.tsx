@@ -1,5 +1,5 @@
 import config from '../../config';
-import { AvatarIcon, HomeActiveIcon, HomeIcon, LiveActiveIcon, LiveIcon, UserGroupActiveIcon, UserGroupIcon } from '../../components/Icons';
+import { AvatarIcon, HomeActiveIcon, HomeIcon, LiveActiveIcon, LiveIcon, MessagesActiveIcon, MessagesIcon, UserGroupActiveIcon, UserGroupIcon } from '../../components/Icons';
 import { useTranslation } from 'react-i18next';
 
 export const itemNavBar = (currentUser: any) => {
@@ -25,6 +25,12 @@ export const itemNavBar = (currentUser: any) => {
       path: config.routes.live,
       icon: <LiveIcon/>,
       activeIcon: <LiveActiveIcon/>
+    },
+    {
+      title: t("navbar.messages"),
+      path: config.routes.messages,
+      icon: <MessagesIcon/>,
+      activeIcon: <MessagesActiveIcon/>
     },
     {
       title: t("navbar.profile"),

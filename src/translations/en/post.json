@@ -3,7 +3,8 @@
     "noti_delete": "Are you sure you want to delete?",
     "delete": "Delete",
     "cancel": "Cancel",
-    "no_post": "There are no posts to display."
+    "no_post": "There are no posts to display.",
+    "liked": "Likes"
   },
   "form": {
     "body": "Create articles",

@@ -26,7 +26,6 @@ function* postRoomSaga(props: any) {
 }
 
 function* postGroupRoomSaga(props: any) {
-    console.log('props.payload', props.payload);
     const formData = new FormData();
     formData.append('title', props.payload.title);
     formData.append(`mediaItem`, props.payload.mediaItem.file);

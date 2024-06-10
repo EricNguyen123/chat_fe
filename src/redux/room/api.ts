@@ -1,4 +1,3 @@
-import { PostData } from './../../types/app';
 import { AxiosResponse } from 'axios';
 import api from '../../utils/api';
 
@@ -11,7 +10,6 @@ export const postRoomApi = (data: any): Promise<AxiosResponse> => {
 };
 
 export const postGroupRoomApi = (data: any): Promise<AxiosResponse> => {
-    console.log('data', data);
     return api.post('/rooms/groups', data.formData, {
         headers: {
             'Content-Type': 'multipart/form-data',

@@ -9,6 +9,7 @@ import { EmojiIcon, MicrophoneIcon, ImageIcon, CloseButton, SendFlyIcon } from '
 import { MediaItem } from '../../../../types/app';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { createMessages } from '../../../../redux/message/actions';
 
 const cx = classNames.bind(styles);
 
@@ -26,6 +27,7 @@ const validationSchema = Yup.object({
 
 interface Props {
     className?: string;
+    id?: string;
 }
 
 interface FormValues {
@@ -33,7 +35,7 @@ interface FormValues {
     mediaItems: MediaItem[];
 }
 
-const MessageForm: React.FC<Props> = ({}) => {
+const MessageForm: React.FC<Props> = ({ id }) => {
     const { t } = useTranslation('messages');
     const fileInputRef = useRef<HTMLInputElement>(null);
     const emojiPickerRef = useRef<HTMLDivElement>(null);
@@ -41,6 +43,8 @@ const MessageForm: React.FC<Props> = ({}) => {
     const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
     const [message, setMessage] = useState('');
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+    const dataUser = localStorage.data ? JSON.parse(localStorage.data) : undefined;
+    const currentUserId = dataUser ? dataUser.id : undefined;
 
     const initialValues: FormValues = {
         message: '',
@@ -71,8 +75,9 @@ const MessageForm: React.FC<Props> = ({}) => {
 
     const handleSubmit = async (values: FormValues, { setSubmitting, resetForm }: FormikHelpers<FormValues>) => {
         try {
-            console.log(values);
+            dispatch(createMessages({ ...values, userId: currentUserId, roomId: id }));
             resetForm();
+            setMessage('');
         } catch (error) {
             console.error('Error creating post:', error);
         } finally {
@@ -84,7 +89,6 @@ const MessageForm: React.FC<Props> = ({}) => {
         const newMessage = message + emoji.native;
         setMessage(newMessage);
         setFieldValue('message', newMessage);
-        console.log(newMessage);
     };
 
     return (

@@ -7,78 +7,91 @@ import { setAuthToken } from './utils';
 import { store } from './redux/store';
 import Loading from './components/Loading';
 import { logout } from './redux/auth/actions';
-import socket from './services/socket';
+import { connectSocket, disconnectSocket } from './services/socket';
+import { setupSocketEvents } from './services/socketEvents';
+import userEvent from '@testing-library/user-event';
 
 if (localStorage.headers) {
-  const headers = JSON.parse(localStorage.headers);
+    const headers = JSON.parse(localStorage.headers);
 
-  if (headers) {
-    setAuthToken(headers);
-  } else {
-    setAuthToken({});
-    store.dispatch(logout());
-  }
+    if (headers) {
+        setAuthToken(headers);
+    } else {
+        setAuthToken({});
+        store.dispatch(logout());
+    }
 } else {
-  setAuthToken({});
+    setAuthToken({});
 }
 
 function App() {
-  const [userLogin, setUserLogin] = useState(false);
-  const authSelector = useSelector(({ auth } : any) => auth);
-  const checkUserLoggedIn = () => authSelector.authenticated ? true : false
-  useEffect(() => {
-    socket.on('connect', () => {
-      console.log('Connected to WebSocket server');
-    });
-    const checkUserLogin = async () => {
-      try {
-        const isLoggedIn = await checkUserLoggedIn();
-        setUserLogin(isLoggedIn);
-      } catch (error) {
-        console.error('Error checking user login:', error);
-      }
-    };
+    const [userLogin, setUserLogin] = useState(false);
+    const authSelector = useSelector(({ auth }: any) => auth);
+    const checkUserLoggedIn = () => (authSelector.authenticated ? true : false);
+    const dataUser = localStorage.data ? JSON.parse(localStorage.data) : undefined;
+    const currentUserId = dataUser ? dataUser.id : undefined;
+    useEffect(() => {
+        if (currentUserId) {
+            connectSocket(currentUserId);
+            setupSocketEvents(currentUserId);
+        }
 
-    checkUserLogin();
-  }, [authSelector.authenticated]);
-    
-  return (
-    <Router>
-      <Loading isLoading={authSelector.loading}/>
-      <div className="App">
-        <Routes>
-            {userLogin &&
-                privateRoutes.map((routes, index) => {
-                    return (
-                        <Route
-                            key={index}
-                            path={routes.path}
-                            element={
-                                <DefaultLayout>
-                                    <routes.component />
-                                </DefaultLayout>
-                            }
-                        />
-                    );
-                })}
-            {!userLogin &&
-                publicRoutes.map((routes, index) => {
-                    return (
-                        <Route
-                            key={index}
-                            path={routes.path}
-                            element={
-                                <DefaultLayout>
-                                    <routes.component />
-                                </DefaultLayout>
-                            }
-                        />
-                    );
-                })}
-            </Routes>
-        </div>
-    </Router>
-  );
+        const checkUserLogin = async () => {
+            try {
+                const isLoggedIn = await checkUserLoggedIn();
+                setUserLogin(isLoggedIn);
+            } catch (error) {
+                console.error('Lỗi khi kiểm tra trạng thái đăng nhập của người dùng:', error);
+            }
+        };
+
+        checkUserLogin();
+    }, [authSelector.authenticated, currentUserId]);
+
+    // useEffect(() => {
+    //     if (!userLogin) {
+    //         return () => {
+    //             disconnectSocket();
+    //         };
+    //     }
+    // }, [userLogin]);
+    return (
+        <Router>
+            <Loading isLoading={authSelector.loading} />
+            <div className="App">
+                <Routes>
+                    {userLogin &&
+                        privateRoutes.map((routes, index) => {
+                            return (
+                                <Route
+                                    key={index}
+                                    path={routes.path}
+                                    element={
+                                        <DefaultLayout>
+                                            <routes.component />
+                                        </DefaultLayout>
+                                    }
+                                />
+                            );
+                        })}
+                    {!userLogin &&
+                        publicRoutes.map((routes, index) => {
+                            return (
+                                <Route
+                                    key={index}
+                                    path={routes.path}
+                                    element={
+                                        <DefaultLayout>
+                                            <routes.component />
+                                        </DefaultLayout>
+                                    }
+                                />
+                            );
+                        })}
+                </Routes>
+            </div>
+        </Router>
+    );
 }
 
 export default App;

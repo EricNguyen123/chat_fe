@@ -64,7 +64,6 @@ const BoxInfo = () => {
     };
 
     const handleMessages = () => {
-        console.log('userSelector.userInfo.id', userSelector.userInfo.id);
         dispatch(createRoom({ id: userSelector.userInfo.id }));
     };
 

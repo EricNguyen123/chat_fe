@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import MoreMenu from '../../../../components/MoreMenu';
 import ConfirmDelete from '../../../../components/ConfirmDelete';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);
 
@@ -20,8 +20,8 @@ interface Props {
 const ItemUser: React.FC<Props> = ({ to, onClick, className, data }) => {
     const { t } = useTranslation('post');
     const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
+    const isOnline = useSelector((state: any) => state.userStatus);
     const dispatch = useDispatch();
-
     const onDelete = () => {
         setDeleteOpen(!deleteOpen);
     };
@@ -45,7 +45,7 @@ const ItemUser: React.FC<Props> = ({ to, onClick, className, data }) => {
             <div className={cx('body')}>
                 <div className={cx('avatar')}>
                     <AvatarIcon width={'50px'} height={'50px'} avatar={data.imagAvatar} />
-                    <div className={cx('status')}></div>
+                    {isOnline[data.id] && <div className={cx('status')}></div>}
                 </div>
                 <div className={cx('content-right')}>
                     <div className={cx('info')}>

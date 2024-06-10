@@ -10,7 +10,7 @@ interface Props {
 const ContentMessages: React.FC<Props> = ({ data }) => {
     return (
         <div className={cx('wrapper')}>
-            <ItemMessages />
+            <ItemMessages data={data.messages} />
         </div>
     );
 };

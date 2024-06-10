@@ -7,6 +7,8 @@ import imageUploadReducer from './image-upload/reducer';
 import postsReducer from './posts/reducer';
 import reactsReducer from './reactIcon/reducer';
 import roomsReducer from './room/reducer';
+import messagesReducer from './message/reducer';
+import statusReducer, { addMessageReducer } from './status/reducer';
 
 import storage from 'redux-persist/es/storage';
 import persistReducer from 'redux-persist/es/persistReducer';
@@ -14,7 +16,7 @@ import persistReducer from 'redux-persist/es/persistReducer';
 const rootPersistConfig = {
     key: 'root',
     storage,
-    blacklist: ['auth', 'users', 'imageUpload', 'posts', 'reacts', 'rooms'],
+    blacklist: ['auth', 'users', 'imageUpload', 'posts', 'reacts', 'rooms', 'messages', 'userStatus', 'addMessage'],
 };
 
 const authPersistConfig = {
@@ -30,6 +32,9 @@ const reducers = combineReducers({
     posts: postsReducer,
     reacts: reactsReducer,
     rooms: roomsReducer,
+    messages: messagesReducer,
+    userStatus: statusReducer,
+    addMessage: addMessageReducer,
 });
 
 type RootState = ReturnType<typeof reducers>;

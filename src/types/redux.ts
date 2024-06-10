@@ -8,10 +8,21 @@ export type AuthState = {
     userInfo: any | undefined;
 };
 
+export type SocketEvents = {
+    sendRoomMessage: (roomId: string, userId: string, message: any) => void;
+    joinRoom: (roomId: string) => void;
+};
+
 export type RoomState = {
     loading: boolean;
     rooms: any | undefined;
     room: any | undefined;
+};
+
+export type MessageState = {
+    loading: boolean;
+    messages: any | undefined;
+    message: any | undefined;
 };
 
 export type PostState = {

@@ -47,7 +47,6 @@ export default function userReducer(state: RoomState = initState, action: Action
         }
 
         case types.POST_GROUP_ROOM_SUCCESS: {
-            console.log('state', state);
             return {
                 ...state,
                 loading: false,

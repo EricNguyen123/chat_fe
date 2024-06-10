@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { getRoom } from '../../../../redux/room/actions';
 import PopupAddGroup from '../popup-add-group';
+import { setupSocketEvents } from '../../../../services/socketEvents';
 
 const cx = classNames.bind(styles);
 
@@ -19,6 +20,7 @@ const ListMessages: React.FC = () => {
     const [onViewAddGroup, setOnViewAddGroup] = useState<boolean>(false);
     const { t } = useTranslation('messages');
     const dispatch = useDispatch();
+    const socketEvents = setupSocketEvents(userSelector.currentUser && userSelector.currentUser.id);
 
     useEffect(() => {
         if (roomsSelector.loading) {
@@ -49,6 +51,13 @@ const ListMessages: React.FC = () => {
 
     const closeViewer = () => {
         setOnViewAddGroup(false);
+    };
+
+    const handleJoinRoom = (roomId: string) => {
+        if (socketEvents) {
+            const { joinRoom } = socketEvents;
+            joinRoom(roomId);
+        }
     };
 
     return (
@@ -85,7 +94,12 @@ const ListMessages: React.FC = () => {
                 <div className={cx('inner-messages')}>
                     <Menu>
                         {rooms.map((room, index) => (
-                            <ItemUser key={index} to={`/messages/${room.id}`} data={room.roomInfor} />
+                            <ItemUser
+                                key={index}
+                                to={`/messages/${room.id}`}
+                                data={room.roomInfor}
+                                onClick={() => handleJoinRoom(room.id)}
+                            />
                         ))}
                     </Menu>
                 </div>

@@ -1,0 +1,63 @@
+// File: /path/to/ItemMessages.module.scss
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.messageItem {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.messageItem.user {
+    justify-content: flex-end;
+}
+
+.messageItem.user .messageContent {
+    background-color: var(--tux-colorBGSecondary-tint-4);
+    margin-right: 10px;
+}
+
+.messageItem.friend {
+    justify-content: flex-start;
+}
+
+.messageItem.friend .messageContent {
+    background-color: var(--white);
+    margin-left: 10px;
+}
+
+.messageContent {
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.messageContent::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    border-width: 5px;
+    border-style: solid;
+}
+
+.messageItem.user .messageContent::before {
+    right: -10px;
+    border-color: transparent transparent transparent var(--tux-colorBGSecondary-tint-4);
+}
+
+.messageItem.friend .messageContent::before {
+    left: -10px;
+    border-color: transparent var(--white) transparent transparent;
+}
+
+.timeStamp {
+    font-size: 0.8em;
+    color: #888;
+    margin-top: 5px;
+}

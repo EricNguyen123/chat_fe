@@ -9,20 +9,16 @@ import { MoreIcon } from '../Icons';
 const cx = classNames.bind(styles);
 
 interface MoreMenuProps {
-  hideOnClick?: boolean;
-  items?: any[];
+    hideOnClick?: boolean;
+    items?: any[];
+    className?: string;
 }
 
-const MoreMenu: React.FC<MoreMenuProps> = ({ items = [], hideOnClick = true }) => {
-    
+const MoreMenu: React.FC<MoreMenuProps> = ({ items = [], hideOnClick = true, className }) => {
     const renderItems = () => {
-        return items.map((item, index) => item.rule ? (
-            <MenuItem
-                key={index}
-                data={item}
-                onClick={item.action}
-            />
-        ) : (<div key={index}></div>));
+        return items.map((item, index) =>
+            item.rule ? <MenuItem key={index} data={item} onClick={item.action} /> : <div key={index}></div>,
+        );
     };
 
     return (
@@ -41,10 +37,10 @@ const MoreMenu: React.FC<MoreMenuProps> = ({ items = [], hideOnClick = true }) =
             )}
         >
             <div className={cx('more-icon')}>
-              <MoreIcon/>
+                <MoreIcon className={cx(className)} />
             </div>
         </Tippy>
     );
-}
+};
 
 export default MoreMenu;

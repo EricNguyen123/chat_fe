@@ -10,30 +10,35 @@ import { useTranslation } from 'react-i18next';
 const cx = classNames.bind(styles);
 
 interface Props {
-  id?: string;
+    id?: string;
 }
-const Post: React.FC<Props> = ({ id = null}) => {
-  const { t } = useTranslation("post");
-  const dispatch = useDispatch();
-  const postSelector = useSelector(({ posts }: any) => posts);
+const Post: React.FC<Props> = ({ id = null }) => {
+    const { t } = useTranslation('post');
+    const dispatch = useDispatch();
+    const postSelector = useSelector(({ posts }: any) => posts);
+    const [posts, setPosts] = useState<any[]>([]);
 
-  useEffect(() => { 
-    id === null ? dispatch(getPosts()) : dispatch(getUserPosts({ id: id }))
-  }, [id])
+    useEffect(() => {
+        if (id) {
+            setPosts(postSelector.user_posts);
+        } else {
+            setPosts(postSelector.posts);
+        }
+    }, [postSelector, id]);
 
-  return (
-    <div className={cx('wrapper')}>
-      <Loading isLoading={postSelector.loading}/>
-      <div className={cx('posts')}>
-        { postSelector && postSelector.posts && 
-          postSelector.posts.length === 0 && 
-          (<span className="noti-empty">{t("noti.no_post")}</span>)} 
-        { postSelector && postSelector.posts &&
-            (postSelector.posts.map((post:any, key: number) => 
-                          (<ItemPost data={post} key={key}/>)))}
-      </div>
-    </div>
-  );
+    useEffect(() => {
+        id === null ? dispatch(getPosts()) : dispatch(getUserPosts({ id: id }));
+    }, [id]);
+
+    return (
+        <div className={cx('wrapper')}>
+            <Loading isLoading={postSelector.loading} />
+            <div className={cx('posts')}>
+                {postSelector && posts && posts.length === 0 && <span className="noti-empty">{t('noti.no_post')}</span>}
+                {postSelector && posts && posts.map((post: any, key: number) => <ItemPost data={post} key={key} />)}
+            </div>
+        </div>
+    );
 };
 
 export default Post;

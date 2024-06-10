@@ -29,6 +29,7 @@ const Search: React.FC<Props> = ({ className }) => {
     const [searchResults, setSearchResults] = useState<any[]>([]);
     const [showResults, setShowResults] = useState<boolean>(true);
     const [loading, setLoading] = useState<boolean>(false);
+    const [loadMoreCount, setLoadMoreCount] = useState<number>(1);
     const dispatch = useDispatch();
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -44,8 +45,9 @@ const Search: React.FC<Props> = ({ className }) => {
             setLoading(true);
 
             const result = await searchServices.search({ q: debounced });
-            setSearchResults(result.slice(0, MAX_INITIAL_RESULT));
+            setSearchResults(result.slice(0, MAX_INITIAL_RESULT && parseInt(MAX_INITIAL_RESULT, 10)));
             setLoading(false);
+            setLoadMoreCount(1);
         };
 
         fetchApi();
@@ -71,6 +73,14 @@ const Search: React.FC<Props> = ({ className }) => {
         handleUser(user);
     };
 
+    const handleLoadMoreResults = async () => {
+        setLoading(true);
+        const result = await searchServices.search({ q: debounced });
+        setSearchResults(result.slice(0, MAX_INITIAL_RESULT && parseInt(MAX_INITIAL_RESULT, 10) * (loadMoreCount + 1)));
+        setLoadMoreCount(loadMoreCount + 1);
+        setLoading(false);
+    };
+
     return (
         <div className={className}>
             <HeadlessTippy
@@ -84,7 +94,9 @@ const Search: React.FC<Props> = ({ className }) => {
                                 {searchResults.map((result) => (
                                     <AccountItem key={result.id} data={result} onClick={() => handleClick(result)} />
                                 ))}
-                                <span className={cx('footer')}>See all search results of "{searchValue}"</span>
+                                <span className={cx('footer')} onClick={handleLoadMoreResults}>
+                                    See more search results of "{searchValue}"
+                                </span>
                             </div>
                         </PopperWrapper>
                     </div>

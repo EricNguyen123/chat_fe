@@ -1,199 +1,199 @@
 .wrapper {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  margin-top: 60px;
-  margin-left: 30px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-top: 60px;
+    margin-left: 30px;
 }
 
 .box-info {
-  width: 100%;
-  position: relative;
-  flex: 0 0 auto;
-  margin-bottom: 20px;
-  box-sizing: border-box;
-  max-width: 624px;
+    width: 100%;
+    position: relative;
+    flex: 0 0 auto;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    max-width: 624px;
 }
 
 .edit-icon {
-  width: 20px;
-  height: 20px;
-  color: rgb(22, 24, 35);
-  margin-right: 6px;
+    width: 20px;
+    height: 20px;
+    color: rgb(22, 24, 35);
+    margin-right: 6px;
 }
 
 .font-name {
-  font-family: var(--font-family-1);
+    font-family: var(--font-family-1);
 }
 
 .row-1 {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .col-2 {
-  flex: 1 1 0%;
-  cursor: pointer;
-  overflow: visible;
-  display: flex;
-  flex-direction: column;
-  -webkit-box-pack: justify;
-  justify-content: space-between;
-  margin-left: 20px;
+    flex: 1 1 0%;
+    cursor: pointer;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin-left: 20px;
 }
 
 .info-name {
-  font-weight: 700;
-  font-size: 32px;
-  line-height: 38px;
-  margin-bottom: 4px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: left;
-  word-break: break-word;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    margin-bottom: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    word-break: break-word;
 }
 
 .title-name {
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 24px;
-  text-overflow: ellipsis;
-  height: 25px;
-  overflow: hidden;
-  max-width: 450px;
-  white-space: nowrap;
-  display: flex;
-  align-items: flex-end;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    text-overflow: ellipsis;
+    height: 25px;
+    overflow: hidden;
+    max-width: 450px;
+    white-space: nowrap;
+    display: flex;
+    align-items: flex-end;
 }
 
 .box-btn {
-  width: 100%;
+    width: 100%;
 }
 
 .box-container {
-  width: max-content;
-  position: relative;
-  height: 36px;
-  padding: 0px;
-  margin: 16px 0px 0px;
+    width: max-content;
+    position: relative;
+    height: 36px;
+    padding: 0px;
+    margin: 16px 0px 0px;
 }
 
 .row-2 {
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-  margin-top: 22px;
-  color: rgba(18, 18, 18, 0.75);
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-top: 22px;
+    color: rgba(18, 18, 18, 0.75);
 }
 
 .item {
-  margin-right: 20px;
-  color: rgb(22, 24, 35);
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 24px;
-  display: flex;
-  direction: ltr;
-  -webkit-box-align: baseline;
-  align-items: baseline;
-  cursor: pointer;
+    margin-right: 20px;
+    color: rgb(22, 24, 35);
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    display: flex;
+    direction: ltr;
+    -webkit-box-align: baseline;
+    align-items: baseline;
+    cursor: pointer;
 }
 
 .number {
-  font-weight: 700;
+    font-weight: 700;
 }
 
 .status {
-  color: rgba(22, 24, 35, 0.75);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
-  display: inline-block;
-  margin-left: 6px;
+    color: rgba(22, 24, 35, 0.75);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    display: inline-block;
+    margin-left: 6px;
 }
 
 .row-3 {
-  text-align: left;
-  color: rgb(22, 24, 35);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 21px;
-  white-space: pre-line;
-  margin-top: 10px;
+    text-align: left;
+    color: rgb(22, 24, 35);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    white-space: pre-line;
+    margin-top: 10px;
 }
 
 .unfollow-btn {
-  display: flex;
-  -webkit-box-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  align-items: center;
-  box-sizing: border-box;
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(22, 24, 35, 0.12);
-  border-radius: 4px;
-  cursor: pointer;
-  position: relative;
-  background-color: rgb(255, 255, 255);
-  float: right;
-  margin-left: 8px;
-  &:hover {
-    background-color: rgba(22, 24, 35, 0.03);
-  }
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(22, 24, 35, 0.12);
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    float: right;
+    margin-left: 8px;
+    &:hover {
+        background-color: var(--tux-colorBGView);
+    }
 }
 
 .box-btn-fl {
-  display: flex;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  opacity: 1;
-  z-index: unset;
+    display: flex;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    opacity: 1;
+    z-index: unset;
 }
 
 .img-avt {
-  width: 116px;
-  height: 116px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+    width: 116px;
+    height: 116px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 .img-up {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
 }
 
 .col-1 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 20px;
 }
 
 .upload-img {
-  position: absolute;
-  top: 96px;
-  cursor: pointer;
-  width: 32px;
-  height: 32px;
-  border: 1px solid rgba(22, 24, 35, 0.12);
-  border-radius: 50%;
-  background-color: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2px;
-  margin: 5px;
-  &:hover {
-    background-color: rgba(217, 218, 225);
-  }
+    position: absolute;
+    top: 96px;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(22, 24, 35, 0.12);
+    border-radius: 50%;
+    background-color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    margin: 5px;
+    &:hover {
+        background-color: rgba(217, 218, 225);
+    }
 }
 
 .line-right {
-  border-right: 1px solid rgba(22, 24, 35, 0.12);
+    border-right: 1px solid rgba(22, 24, 35, 0.12);
 }

@@ -1,0 +1,81 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-width: 0;
+    max-width: 100%;
+    min-height: inherit;
+    border-left: 1px solid rgba(22, 24, 35, 0.12);
+    box-sizing: border-box;
+    flex-grow: 1;
+    flex-shrink: 1;
+    position: relative;
+    flex-basis: 0;
+}
+
+.not-msg,
+.body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.not-msg {
+    align-items: center;
+    justify-content: center;
+}
+
+.body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.title-msg {
+    word-wrap: break-word;
+    white-space: pre-line;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: var(--font-family-1);
+    color: var(--text-color);
+    margin-top: 10px;
+}
+
+.tiny-title {
+    word-wrap: break-word;
+    white-space: pre-line;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: var(--font-family-1);
+    color: var(--tux-colorLineInput);
+    margin-top: 3px;
+}
+
+.header-msg {
+    width: 100%;
+    height: var(--height-header-msg);
+    padding-top: 36px;
+    padding-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.content-msg {
+    width: 100%;
+    height: calc(100vh - 2 * var(--height-header-msg) - var(--height-header));
+    overflow-y: auto;
+}
+
+.footer-msg {
+    width: 100%;
+    height: var(--height-header-msg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}

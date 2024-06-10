@@ -1,0 +1,221 @@
+.wrapper {
+    min-width: 360px;
+    width: 360px;
+    max-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header-popup {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title-popup {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    word-wrap: break-word;
+    white-space: pre-line;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: var(--font-family-1);
+    color: var(--text-color);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.text {
+    // your existing styles
+}
+
+.body-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.box-add-name {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.item-input-name {
+    display: flex;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 12px 16px;
+    background: var(--tux-colorBGPrimary);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    margin: 0px;
+    margin-left: 20px;
+    border: 1px solid rgb(254, 44, 85);
+    box-sizing: border-box;
+}
+
+.item-img {
+    position: relative;
+    // your existing styles
+}
+
+.custum-file-upload {
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.label {
+    // your existing styles
+}
+
+.icon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid rgb(254, 44, 85);
+}
+
+.input-img {
+    display: none;
+}
+
+.box-preview {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.preview-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.input {
+    font-family: var(--font-family-1);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    border: none;
+    background: transparent;
+    outline: none;
+    padding: 0px;
+    width: 100%;
+    color: rgb(22, 24, 35);
+    caret-color: rgb(254, 44, 85);
+    appearance: textfield;
+}
+
+.noti {
+    // your existing styles
+}
+
+.text-noti {
+    // your existing styles
+}
+
+.submit {
+    display: inline-block;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 0px 16px;
+    border-radius: 4px;
+    border-width: 1px;
+    border-style: solid;
+    min-height: 36px;
+    justify-content: center;
+    width: 100%;
+    margin: 15px 5px;
+
+    background-color: rgb(254, 44, 85);
+
+    min-width: 208px;
+    height: 36px;
+    padding: 6px 8px;
+    border: none;
+    &:hover {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), rgb(254, 44, 85);
+    }
+    .text-btn {
+        color: rgb(255, 255, 255);
+        font-size: 18px;
+        font-weight: 600;
+        font-family: var(--font-family-1);
+    }
+}
+
+.line-nav {
+    width: 100%;
+    height: 1px;
+    background: rgba(22, 24, 35, 0.12);
+    transform: scaleY(0.5);
+}
+
+.body-popup {
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.title-nav-footer {
+    width: 100%;
+    padding: 0px 8px;
+    margin-bottom: 8px;
+    font-family: var(--font-family-1);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    margin-top: 16px;
+}
+
+.account-item-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+}
+
+.checkbox {
+    margin-right: 10px;
+}
+
+.account-item {
+    border-left: 1px solid rgba(22, 24, 35, 0.12);
+    flex-grow: 1;
+}

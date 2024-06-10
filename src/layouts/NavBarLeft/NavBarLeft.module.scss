@@ -1,37 +1,37 @@
 .wrapper {
-  width: var(--width-navbar);
-  height: 100%;
-  background-color: var(--white) ;
-  padding: 5px 0px 26px 8px;
-  position: fixed;
-  z-index: 990;
+    width: var(--width-navbar);
+    height: 100%;
+    background-color: var(--white);
+    padding: 5px 0px 26px 8px;
+    position: fixed;
+    z-index: 990;
 }
 
 .footer {
-  width: 100%;
+    width: 100%;
 }
 
 .line-nav {
-  height: 1px;
-  background: rgba(22, 24, 35, 0.12);
-  transform: scaleY(0.5);
+    height: 1px;
+    background: rgba(22, 24, 35, 0.12);
+    transform: scaleY(0.5);
 }
 
 .title-nav-footer {
-  padding: 0px 8px;
-  margin-bottom: 8px;
-  font-family: var(--font-family-1);
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 18px;
-  margin-top: 16px;
+    padding: 0px 8px;
+    margin-bottom: 8px;
+    font-family: var(--font-family-1);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    margin-top: 16px;
 }
 
 .custom {
-  width: 90%;
-  margin: 5px auto;
-  cursor: pointer;
-  &:hover {
-    background-color: rgba(22, 24, 35, 0.03);
-  }
+    width: 90%;
+    margin: 5px auto;
+    cursor: pointer;
+    &:hover {
+        background-color: var(--tux-colorBGView);
+    }
 }

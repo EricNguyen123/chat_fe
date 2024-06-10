@@ -1,23 +1,19 @@
-import classNames from 'classnames/bind';
-import styles from './Loading.module.scss';
 import React from 'react';
-
-const cx = classNames.bind(styles);
-
+import { Flex, Spin } from 'antd';
 interface Props {
-  isLoading: boolean;
+    isLoading: boolean;
 }
 
 const Loading: React.FC<Props> = ({ isLoading }) => {
-  return (
-    <>
-      { isLoading && 
-      (<div className={cx('bg-grey1', 'loading-wrapper')}>
-        <div className={cx('circle-loading')}></div>
-      </div>)}
-    </>
-   
-  )
+    return (
+        <>
+            {isLoading && (
+                <Flex align="center" gap="middle">
+                    <Spin size="large" fullscreen={isLoading} />
+                </Flex>
+            )}
+        </>
+    );
 };
 
 export default Loading;

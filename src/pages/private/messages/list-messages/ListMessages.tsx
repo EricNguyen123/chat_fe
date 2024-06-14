@@ -10,12 +10,15 @@ import { useTranslation } from 'react-i18next';
 import { getRoom } from '../../../../redux/room/actions';
 import PopupAddGroup from '../popup-add-group';
 import { setupSocketEvents } from '../../../../services/socketEvents';
+import ClickOutside from '../../../../components/ClickOutside';
 
 const cx = classNames.bind(styles);
 
 const ListMessages: React.FC = () => {
     const userSelector = useSelector(({ users }: any) => users);
     const roomsSelector = useSelector(({ rooms }: any) => rooms);
+    const lastMessagesSelector = useSelector(({ lastMessages }: any) => lastMessages);
+    const deleteRoomSelector = useSelector(({ deleteRoom }: any) => deleteRoom);
     const [rooms, setRooms] = useState<any[]>([]);
     const [onViewAddGroup, setOnViewAddGroup] = useState<boolean>(false);
     const { t } = useTranslation('messages');
@@ -26,23 +29,75 @@ const ListMessages: React.FC = () => {
         if (roomsSelector.loading) {
             closeViewer();
         }
-        if (roomsSelector && roomsSelector.rooms && userSelector.currentUser) {
-            const newRooms = roomsSelector.rooms.map((e: any) => {
-                if (e.groups === 0) {
-                    return {
-                        ...e,
-                        roomInfor: e.users.find((r: any) => r.id !== userSelector.currentUser.id),
-                    };
-                } else {
-                    return e;
-                }
+        if (roomsSelector && roomsSelector.rooms && userSelector.currentUser && lastMessagesSelector.allLastMessages) {
+            const lastMessages = JSON.parse(lastMessagesSelector.allLastMessages);
+            const currentUserID = userSelector.currentUser.id;
+            const isSingleGroup = (room: any) => room.groups === 0;
+
+            const lastMessagesMap = new Map();
+            lastMessages.forEach((msg: any) => {
+                lastMessagesMap.set(msg.id, msg);
             });
+
+            const newRooms = roomsSelector.rooms.map((room: any) => {
+                const lastMessage = lastMessagesMap.get(room.id);
+                const lastMessageData = lastMessage ? lastMessage.lastMessage : [];
+                const userChatEnd =
+                    lastMessageData.length > 0
+                        ? room.users.find((user: any) => user.id === lastMessageData[0].userId)
+                        : undefined;
+                const roomInfor = isSingleGroup(room)
+                    ? room.users.find((user: any) => user.id !== currentUserID)
+                    : room.roomInfor;
+
+                lastMessagesMap.delete(room.id); // Xóa phòng đã xử lý
+
+                return {
+                    ...room,
+                    lastMessage: lastMessageData,
+                    userChatEnd: userChatEnd ? [userChatEnd] : [],
+                    roomInfor: roomInfor,
+                };
+            });
+
+            lastMessagesMap.forEach((msg) => {
+                const userChatEnd =
+                    msg.lastMessage.length > 0
+                        ? msg.users.find((user: any) => user.id === msg.lastMessage[0].userId)
+                        : undefined;
+                const roomInfor = isSingleGroup(msg)
+                    ? msg.users.find((user: any) => user.id !== currentUserID)
+                    : msg.roomInfor;
+
+                const newRoom = {
+                    ...msg,
+                    lastMessage: msg.lastMessage,
+                    userChatEnd: userChatEnd ? [userChatEnd] : [],
+                    roomInfor: roomInfor,
+                };
+
+                newRooms.push(newRoom);
+            });
+
             setRooms(newRooms);
         }
-    }, [roomsSelector, userSelector]);
+    }, [roomsSelector, userSelector, lastMessagesSelector]);
 
     useEffect(() => {
         dispatch(getRoom());
+    }, []);
+
+    useEffect(() => {
+        if (deleteRoomSelector.deleteRoom && deleteRoomSelector.deleteRoom.roomId) {
+            setRooms(rooms.filter((room) => room.id !== deleteRoomSelector.deleteRoom.roomId));
+        }
+    }, [deleteRoomSelector]);
+
+    useEffect(() => {
+        if (userSelector && userSelector.currentUser) {
+            const socketEvents = setupSocketEvents && setupSocketEvents(userSelector.currentUser.id);
+            socketEvents && socketEvents.sendAllLastMessages(userSelector.currentUser.id);
+        }
     }, []);
 
     const handleAddGroup = () => {
@@ -99,6 +154,9 @@ const ListMessages: React.FC = () => {
                                 to={`/messages/${room.id}`}
                                 data={room.roomInfor}
                                 onClick={() => handleJoinRoom(room.id)}
+                                lastMessage={room.lastMessage}
+                                userChatEnd={room.userChatEnd}
+                                roomId={room.id}
                             />
                         ))}
                     </Menu>
@@ -106,12 +164,18 @@ const ListMessages: React.FC = () => {
             </div>
             {onViewAddGroup && (
                 <div className={cx('add-viewer')}>
-                    <div className={cx('box-add')}>
+                    <ClickOutside
+                        openView={onViewAddGroup}
+                        closeView={() => {
+                            closeViewer();
+                        }}
+                        className={cx('box-add')}
+                    >
                         <button onClick={closeViewer} className={cx('close-button')}>
                             <CloseButton />
                         </button>
                         <PopupAddGroup />
-                    </div>
+                    </ClickOutside>
                 </div>
             )}
         </div>

@@ -8,12 +8,18 @@
 
 .messageItem {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     margin-bottom: 10px;
+    &:hover {
+        .btn-control {
+            display: flex;
+        }
+    }
 }
 
 .messageItem.user {
-    justify-content: flex-end;
+    justify-content: flex-start;
+    flex-direction: row-reverse;
 }
 
 .messageItem.user .messageContent {
@@ -31,11 +37,19 @@
 }
 
 .messageContent {
+    display: inline-block;
     max-width: 70%;
+    min-width: 100px;
     padding: 10px;
     border-radius: 10px;
     position: relative;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    &:hover {
+        .timeStamp {
+            display: flex;
+        }
+    }
+    cursor: pointer;
 }
 
 .messageContent::before {
@@ -58,6 +72,105 @@
 
 .timeStamp {
     font-size: 0.8em;
+    font-family: var(--font-family-1);
     color: #888;
     margin-top: 5px;
+    display: none;
+}
+
+.gallery {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close-button {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    background: rgba(84, 84, 84, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    width: 40px;
+    height: 40px;
+    transition: opacity 0.3s ease 0s;
+    z-index: 100;
+    transform: translateY(0px);
+    &:hover {
+        opacity: 0.7;
+        background-color: (37, 37, 37, 0.6);
+    }
+}
+
+.centered {
+    width: 600px;
+    height: 600px;
+    padding: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.date-line {
+    font-size: 14px;
+    font-weight: 400;
+    font-family: var(--font-family-1);
+    color: var(--tux-colorLineInput);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0px;
+}
+
+.text-msg {
+    font-size: 16px;
+    font-weight: 500;
+    font-family: var(--font-family-1);
+    color: var(--text-color);
+}
+
+.line-avatar {
+    width: 20px;
+    height: 20px;
+}
+
+.btn-control {
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 6px;
+    margin-top: auto;
+    margin-bottom: auto;
+    cursor: pointer;
+}
+
+.more-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--tux-colorLineInput);
+    transform: rotate(90deg);
+}
+
+.icon-cmt {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

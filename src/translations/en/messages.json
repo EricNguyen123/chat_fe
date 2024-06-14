@@ -3,5 +3,8 @@
         "msg": "Messages",
         "req": "Requests",
         "message": "Message..."
+    },
+    "header": {
+        "is_active": "Is active"
     }
 }

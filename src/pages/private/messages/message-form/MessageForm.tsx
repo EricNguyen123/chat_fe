@@ -10,6 +10,8 @@ import { MediaItem } from '../../../../types/app';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { createMessages } from '../../../../redux/message/actions';
+import ChatComponent from '../chat-voice';
+import ClickOutside from '../../../../components/ClickOutside';
 
 const cx = classNames.bind(styles);
 
@@ -38,11 +40,12 @@ interface FormValues {
 const MessageForm: React.FC<Props> = ({ id }) => {
     const { t } = useTranslation('messages');
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const emojiPickerRef = useRef<HTMLDivElement>(null);
+    // const emojiPickerRef = useRef<HTMLDivElement>(null);
     const dispatch = useDispatch();
     const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
     const [message, setMessage] = useState('');
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+    const [showVoice, setShowVoice] = useState(false);
     const dataUser = localStorage.data ? JSON.parse(localStorage.data) : undefined;
     const currentUserId = dataUser ? dataUser.id : undefined;
 
@@ -55,23 +58,23 @@ const MessageForm: React.FC<Props> = ({ id }) => {
         setIsSubmitButtonDisabled(!message.trim());
     }, [message]);
 
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (emojiPickerRef.current && !emojiPickerRef.current.contains(event.target as Node)) {
-                setShowEmojiPicker(false);
-            }
-        };
+    // useEffect(() => {
+    //     const handleClickOutside = (event: MouseEvent) => {
+    //         if (emojiPickerRef.current && !emojiPickerRef.current.contains(event.target as Node)) {
+    //             setShowEmojiPicker(false);
+    //         }
+    //     };
 
-        if (showEmojiPicker) {
-            document.addEventListener('mousedown', handleClickOutside);
-        } else {
-            document.removeEventListener('mousedown', handleClickOutside);
-        }
+    //     if (showEmojiPicker) {
+    //         document.addEventListener('mousedown', handleClickOutside);
+    //     } else {
+    //         document.removeEventListener('mousedown', handleClickOutside);
+    //     }
 
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [showEmojiPicker]);
+    //     return () => {
+    //         document.removeEventListener('mousedown', handleClickOutside);
+    //     };
+    // }, [showEmojiPicker]);
 
     const handleSubmit = async (values: FormValues, { setSubmitting, resetForm }: FormikHelpers<FormValues>) => {
         try {
@@ -91,6 +94,15 @@ const MessageForm: React.FC<Props> = ({ id }) => {
         setFieldValue('message', newMessage);
     };
 
+    const handleVoice = () => {
+        setShowVoice(true);
+    };
+
+    const closeViewer = () => {
+        setShowVoice(false);
+        setShowEmojiPicker(false);
+    };
+
     return (
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
             {({ values, setFieldValue, isSubmitting }) => {
@@ -100,14 +112,16 @@ const MessageForm: React.FC<Props> = ({ id }) => {
                             <div className={cx('icon')} onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
                                 <EmojiIcon />
                             </div>
-                            {showEmojiPicker && (
-                                <div ref={emojiPickerRef} className={cx('emoji-picker')}>
-                                    <Picker
-                                        data={data}
-                                        onEmojiSelect={(emoji: any) => addEmoji(emoji, setFieldValue)}
-                                    />
-                                </div>
-                            )}
+
+                            <ClickOutside
+                                closeView={() => {
+                                    closeViewer();
+                                }}
+                                openView={showEmojiPicker}
+                                className={cx('emoji-picker')}
+                            >
+                                <Picker data={data} onEmojiSelect={(emoji: any) => addEmoji(emoji, setFieldValue)} />
+                            </ClickOutside>
                         </div>
                         <Field
                             type="text"
@@ -121,9 +135,25 @@ const MessageForm: React.FC<Props> = ({ id }) => {
                                 setMessage(value);
                             }}
                         />
-                        <div className={cx('icon')}>
+                        <div className={cx('icon')} onClick={handleVoice}>
                             <MicrophoneIcon />
                         </div>
+                        {showVoice && (
+                            <div className={cx('chat-voice')}>
+                                <ClickOutside
+                                    closeView={() => {
+                                        closeViewer();
+                                    }}
+                                    openView={showVoice}
+                                    className={cx('box-view')}
+                                >
+                                    <button onClick={closeViewer} className={cx('close-button')}>
+                                        <CloseButton />
+                                    </button>
+                                    <ChatComponent recordedBlobs={!showVoice} onViewer={closeViewer} />
+                                </ClickOutside>
+                            </div>
+                        )}
                         <div className={cx('item', 'item-img')}>
                             <div className={cx('custum-file-upload')} onClick={() => fileInputRef.current?.click()}>
                                 <label htmlFor="media" className={cx('label')}></label>

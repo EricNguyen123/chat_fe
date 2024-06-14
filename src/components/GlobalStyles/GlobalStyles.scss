@@ -181,6 +181,45 @@ button {
     user-select: none !important;
 }
 
+audio {
+    source {
+        display: none;
+    }
+
+    &::-webkit-media-controls {
+        border-radius: 50px;
+        border: 1px solid var(--tux-colorPrimary);
+    }
+
+    &::-webkit-media-controls-panel {
+        background-color: var(--tux-colorBGTertiary);
+        color: var(--tux-colorPrimary);
+    }
+
+    &::-webkit-media-controls-volume-slider-container {
+    }
+
+    &::-webkit-media-controls-mute-button {
+    }
+
+    &::-webkit-media-controls-play-button,
+    &::-webkit-media-controls-current-time-display,
+    &::-webkit-media-controls-time-remaining-display,
+    &::-webkit-media-controls-seek-back-button,
+    &::-webkit-media-controls-seek-forward-button {
+        background-color: var(--tux-colorBGTertiary);
+        // color: var(--tux-colorPrimary);
+    }
+
+    &::-webkit-media-controls-timeline {
+        background-color: var(--tux-colorBGTertiary);
+    }
+
+    &::-webkit-media-controls-volume-slider {
+        // background-color: var(--tux-colorBGTertiary);
+    }
+}
+
 @font-face {
     font-family: TikTokDisplayFont-Bold;
     src: url('../../assets/fonts/TikTokDisplayFont-Bold.woff2');

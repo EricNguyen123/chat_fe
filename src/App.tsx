@@ -31,15 +31,20 @@ function App() {
     const dataUser = localStorage.data ? JSON.parse(localStorage.data) : undefined;
     const currentUserId = dataUser ? dataUser.id : undefined;
     useEffect(() => {
-        if (currentUserId) {
-            connectSocket(currentUserId);
-            setupSocketEvents(currentUserId);
-        }
-
         const checkUserLogin = async () => {
             try {
                 const isLoggedIn = await checkUserLoggedIn();
                 setUserLogin(isLoggedIn);
+                if (isLoggedIn) {
+                    if (currentUserId) {
+                        connectSocket(currentUserId);
+                        const socketEvents = setupSocketEvents(currentUserId);
+                        if (socketEvents) {
+                            const { reload } = socketEvents;
+                            reload();
+                        }
+                    }
+                }
             } catch (error) {
                 console.error('Lỗi khi kiểm tra trạng thái đăng nhập của người dùng:', error);
             }
@@ -48,13 +53,6 @@ function App() {
         checkUserLogin();
     }, [authSelector.authenticated, currentUserId]);
 
-    // useEffect(() => {
-    //     if (!userLogin) {
-    //         return () => {
-    //             disconnectSocket();
-    //         };
-    //     }
-    // }, [userLogin]);
     return (
         <Router>
             <Loading isLoading={authSelector.loading} />

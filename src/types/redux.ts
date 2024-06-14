@@ -11,6 +11,7 @@ export type AuthState = {
 export type SocketEvents = {
     sendRoomMessage: (roomId: string, userId: string, message: any) => void;
     joinRoom: (roomId: string) => void;
+    reload: () => void;
 };
 
 export type RoomState = {

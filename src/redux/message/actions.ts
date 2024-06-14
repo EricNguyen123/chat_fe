@@ -20,3 +20,23 @@ export const createMessagesResult = (result: any, isSuccess = true): Action => (
     type: isSuccess ? types.POST_MESSAGES_SUCCESS : types.POST_MESSAGES_FAILED,
     payload: result,
 });
+
+export const deleteMessages = (data: any): Action => ({
+    type: types.DELETE_MESSAGES,
+    payload: data,
+});
+
+export const deleteMessagesResult = (result: any, isSuccess = true): Action => ({
+    type: isSuccess ? types.DELETE_MESSAGES_SUCCESS : types.DELETE_MESSAGES_FAILED,
+    payload: result,
+});
+
+export const voiceMessages = (data: any): Action => ({
+    type: types.VOICE_MESSAGES,
+    payload: data,
+});
+
+export const voiceMessagesResult = (result: any, isSuccess = true): Action => ({
+    type: isSuccess ? types.VOICE_MESSAGES_SUCCESS : types.VOICE_MESSAGES_FAILED,
+    payload: result,
+});

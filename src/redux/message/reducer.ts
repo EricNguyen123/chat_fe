@@ -40,6 +40,7 @@ export default function userReducer(state: MessageState = initState, action: Act
                     action.payload.data.userId,
                     JSON.stringify(action.payload.data),
                 );
+            socketEvents && socketEvents.sendAllLastMessages(currentUserId);
             return {
                 ...state,
                 loading: false,
@@ -48,6 +49,51 @@ export default function userReducer(state: MessageState = initState, action: Act
         }
 
         case types.POST_MESSAGES_FAILED: {
+            return { ...state, loading: false };
+        }
+
+        case types.DELETE_MESSAGES: {
+            return { ...state, loading: true };
+        }
+
+        case types.DELETE_MESSAGES_SUCCESS: {
+            const dataUser = localStorage.data ? JSON.parse(localStorage.data) : undefined;
+            const currentUserId = dataUser ? dataUser.id : undefined;
+            const socketEvents = setupSocketEvents && setupSocketEvents(currentUserId);
+            socketEvents && socketEvents.sendMessageDelete(action.payload.roomId, action.payload.id);
+            return {
+                ...state,
+                loading: false,
+                message: action.payload.message || undefined,
+            };
+        }
+
+        case types.DELETE_MESSAGES_FAILED: {
+            return { ...state, loading: false };
+        }
+
+        case types.VOICE_MESSAGES: {
+            return { ...state, loading: true };
+        }
+
+        case types.VOICE_MESSAGES_SUCCESS: {
+            const dataUser = localStorage.data ? JSON.parse(localStorage.data) : undefined;
+            const currentUserId = dataUser ? dataUser.id : undefined;
+            const socketEvents = setupSocketEvents && setupSocketEvents(currentUserId);
+            socketEvents &&
+                socketEvents.sendRoomMessage(
+                    action.payload.data.roomId,
+                    action.payload.data.userId,
+                    JSON.stringify(action.payload.data),
+                );
+            return {
+                ...state,
+                loading: false,
+                recordedBlob: action.payload.recordedBlob || undefined,
+            };
+        }
+
+        case types.VOICE_MESSAGES_FAILED: {
             return { ...state, loading: false };
         }
 

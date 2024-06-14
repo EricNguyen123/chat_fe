@@ -17,6 +17,8 @@ const BoxInfo = () => {
     const dispatch = useDispatch();
     const userSelector = useSelector(({ users }: any) => users);
     const media = useSelector(({ imageUpload }: any) => imageUpload);
+    const roomsSelector = useSelector(({ rooms }: any) => rooms);
+    const [checkMessage, setCheckMessage] = useState<boolean>(false);
     const [image, setImage] = useState('');
     const { t } = useTranslation('header');
     const data = JSON.parse(localStorage.data);
@@ -64,8 +66,15 @@ const BoxInfo = () => {
     };
 
     const handleMessages = () => {
+        setCheckMessage(true);
         dispatch(createRoom({ id: userSelector.userInfo.id }));
     };
+
+    useEffect(() => {
+        if (checkMessage && roomsSelector && roomsSelector.room && roomsSelector.room.room) {
+            handleRedirectPage(`/messages/${roomsSelector.room.room.id}`);
+        }
+    }, [roomsSelector]);
 
     return (
         <div className={cx('wrapper')}>

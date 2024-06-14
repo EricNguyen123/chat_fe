@@ -6,7 +6,9 @@ import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import MoreMenu from '../../../../components/MoreMenu';
 import ConfirmDelete from '../../../../components/ConfirmDelete';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { formatRelativeTime } from '../../../../utils/formatDate';
+import { setupSocketEvents } from '../../../../services/socketEvents';
 
 const cx = classNames.bind(styles);
 
@@ -15,13 +17,17 @@ interface Props {
     onClick?: () => void;
     data: any;
     className?: string;
+    lastMessage: any;
+    userChatEnd: any;
+    roomId: string;
 }
 
-const ItemUser: React.FC<Props> = ({ to, onClick, className, data }) => {
+const ItemUser: React.FC<Props> = ({ to, onClick, className, data, lastMessage, userChatEnd, roomId }) => {
     const { t } = useTranslation('post');
+    const userSelector = useSelector(({ users }: any) => users);
     const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
     const isOnline = useSelector((state: any) => state.userStatus);
-    const dispatch = useDispatch();
+
     const onDelete = () => {
         setDeleteOpen(!deleteOpen);
     };
@@ -30,7 +36,13 @@ const ItemUser: React.FC<Props> = ({ to, onClick, className, data }) => {
         setDeleteOpen(false);
     };
 
-    const handleConfirmDelete = () => {};
+    const handleConfirmDelete = () => {
+        closeViewer();
+        if (userSelector && userSelector.currentUser) {
+            const socketEvents = setupSocketEvents && setupSocketEvents(userSelector.currentUser.id);
+            socketEvents && socketEvents.sendDeleteRoom(roomId, userSelector.currentUser.id);
+        }
+    };
 
     const moreMenu = [
         {
@@ -53,12 +65,21 @@ const ItemUser: React.FC<Props> = ({ to, onClick, className, data }) => {
                             <span className={cx('name')}>{data.name}</span>
                         </div>
                         <div className={cx('text-msg')}>
-                            <span className={cx('msg')}>you: aaa</span>
-                            <span className={cx('break')}>
-                                <span className={cx('icon-br')}>&nbsp;</span>
-                                <span aria-hidden="true"> · </span>
-                            </span>
-                            <span className={cx('time-msg')}>3d</span>
+                            {lastMessage.length > 0 && (
+                                <>
+                                    <span className={cx('msg')}>
+                                        {`${userChatEnd.length > 0 ? userChatEnd[0].name : ''}: 
+                                ${lastMessage.length > 0 ? lastMessage[0].messages : ''}`}
+                                    </span>
+                                    <span className={cx('break')}>
+                                        <span className={cx('icon-br')}>&nbsp;</span>
+                                        <span aria-hidden="true"> · </span>
+                                    </span>
+                                    <span className={cx('time-msg')}>
+                                        {formatRelativeTime(lastMessage[0].createdAt)}
+                                    </span>
+                                </>
+                            )}
                         </div>
                     </div>
                     <div className={cx('btn-control')}>

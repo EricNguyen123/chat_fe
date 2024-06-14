@@ -8,7 +8,13 @@ import postsReducer from './posts/reducer';
 import reactsReducer from './reactIcon/reducer';
 import roomsReducer from './room/reducer';
 import messagesReducer from './message/reducer';
-import statusReducer, { addMessageReducer } from './status/reducer';
+import statusReducer, {
+    addMessageReducer,
+    allLastMessagesReducer,
+    deleteMessageReducer,
+    deleteRoomReducer,
+    changedMessageReducer,
+} from './status/reducer';
 
 import storage from 'redux-persist/es/storage';
 import persistReducer from 'redux-persist/es/persistReducer';
@@ -16,7 +22,21 @@ import persistReducer from 'redux-persist/es/persistReducer';
 const rootPersistConfig = {
     key: 'root',
     storage,
-    blacklist: ['auth', 'users', 'imageUpload', 'posts', 'reacts', 'rooms', 'messages', 'userStatus', 'addMessage'],
+    blacklist: [
+        'auth',
+        'users',
+        'imageUpload',
+        'posts',
+        'reacts',
+        'rooms',
+        'messages',
+        'userStatus',
+        'addMessage',
+        'deleteMessage',
+        'lastMessages',
+        'deleteRoom',
+        'changedMessage',
+    ],
 };
 
 const authPersistConfig = {
@@ -35,6 +55,10 @@ const reducers = combineReducers({
     messages: messagesReducer,
     userStatus: statusReducer,
     addMessage: addMessageReducer,
+    deleteMessage: deleteMessageReducer,
+    lastMessages: allLastMessagesReducer,
+    deleteRoom: deleteRoomReducer,
+    changedMessage: changedMessageReducer,
 });
 
 type RootState = ReturnType<typeof reducers>;

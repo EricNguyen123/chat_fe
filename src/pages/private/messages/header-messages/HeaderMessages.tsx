@@ -3,6 +3,7 @@ import styles from './HeaderMessages.module.scss';
 import React from 'react';
 import { AvatarIcon, CallIcon, InfoIcon, VideoCallIcon } from '../../../../components/Icons';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 const cx = classNames.bind(styles);
 
@@ -12,6 +13,7 @@ interface Props {
 
 const HeaderMessages: React.FC<Props> = ({ roomInfor }) => {
     const isOnline = useSelector((state: any) => state.userStatus);
+    const { t } = useTranslation('messages');
 
     return (
         <div className={cx('wrapper')}>
@@ -24,7 +26,7 @@ const HeaderMessages: React.FC<Props> = ({ roomInfor }) => {
                         <span className={cx('name')}>{roomInfor.name}</span>
                     </div>
                     <div className={cx('text-msg')}>
-                        <span className={cx('msg')}>{isOnline[roomInfor.id] && 'dang hoat dong'}</span>
+                        <span className={cx('msg')}>{isOnline[roomInfor.id] && t('header.is_active')}</span>
                     </div>
                 </div>
             </div>

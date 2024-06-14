@@ -1,28 +1,29 @@
 {
-  "noti": {
-    "noti_delete": "Are you sure you want to delete?",
-    "delete": "Delete",
-    "cancel": "Cancel",
-    "no_post": "There are no posts to display.",
-    "liked": "Likes"
-  },
-  "form": {
-    "body": "Create articles",
-    "status": "Status",
-    "public": "Public",
-    "friends": "Friends",
-    "private": "Only me",
-    "upload_img": "Click to upload image",
-    "no_img": "No photos to show.",
-    "btn_upload": "Update Post",
-    "btn_post": "Create Post"
-  },
-  "comment": {
-    "btn_more_comment": "Show more replies",
-    "btn_reply": "Reply",
-    "btn_cancel": "Cancel",
-    "btn_delete": "Delete",
-    "btn_edit": "Edit",
-    "btn_hidden": "Hidden"
-  }
+    "noti": {
+        "noti_delete": "Are you sure you want to delete?",
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "no_post": "There are no posts to display.",
+        "liked": "Likes",
+        "not_support_audio": "Your browser does not support the audio element."
+    },
+    "form": {
+        "body": "Create articles",
+        "status": "Status",
+        "public": "Public",
+        "friends": "Friends",
+        "private": "Only me",
+        "upload_img": "Click to upload image",
+        "no_img": "No photos to show.",
+        "btn_upload": "Update Post",
+        "btn_post": "Create Post"
+    },
+    "comment": {
+        "btn_more_comment": "Show more replies",
+        "btn_reply": "Reply",
+        "btn_cancel": "Cancel",
+        "btn_delete": "Delete",
+        "btn_edit": "Edit",
+        "btn_hidden": "Hidden"
+    }
 }

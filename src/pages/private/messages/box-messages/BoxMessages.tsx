@@ -20,6 +20,7 @@ const BoxMessages: React.FC<Props> = ({ checkMessage, id, roomInfor }) => {
     const dispatch = useDispatch();
     const messagesSelector = useSelector(({ messages }: any) => messages);
     const [messages, setMessages] = useState<any[]>([]);
+
     useEffect(() => {
         if (id) {
             dispatch(getMessages({ roomId: id }));

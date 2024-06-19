@@ -11,7 +11,7 @@ import ButtonNav from '../../components/ButtonNav';
 import { AvatarIcon } from '../../components/Icons';
 import Menu from '../../components/Popper/Menu';
 import { MyMenu } from '../../contains/Menu';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getUser } from '../../redux/users/actions';
 import SearchCus from '../../components/Search';
 
@@ -23,6 +23,7 @@ const Header = () => {
     const userSelector = useSelector(({ users }: any) => users);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [userId, setUserId] = useState();
 
     const handleLogout = () => {
         dispatch(logout());
@@ -40,6 +41,12 @@ const Header = () => {
             dispatch(getUser());
         }
     }, [authSelector.authenticated]);
+
+    useEffect(() => {
+        if (userSelector.currentUser && userSelector.currentUser.id) {
+            setUserId(userSelector.currentUser.id);
+        }
+    }, [userSelector.currentUser]);
 
     return (
         <div className={cx('wrapper')}>
@@ -59,7 +66,7 @@ const Header = () => {
                 ) : (
                     <div className={cx('header-right-inner')}>
                         <SearchCus className={cx('searchcus')} />
-                        <Menu items={MyMenu(t)} onChange={handleMenuChange}>
+                        <Menu items={MyMenu(t, userId)} onChange={handleMenuChange}>
                             <ButtonNav>
                                 <div className={cx('img-user')}>
                                     <AvatarIcon

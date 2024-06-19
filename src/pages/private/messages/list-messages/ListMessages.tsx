@@ -50,7 +50,7 @@ const ListMessages: React.FC = () => {
                     ? room.users.find((user: any) => user.id !== currentUserID)
                     : room.roomInfor;
 
-                lastMessagesMap.delete(room.id); // Xóa phòng đã xử lý
+                lastMessagesMap.delete(room.id);
 
                 return {
                     ...room,
@@ -78,20 +78,19 @@ const ListMessages: React.FC = () => {
 
                 newRooms.push(newRoom);
             });
-
-            setRooms(newRooms);
+            let newRoomed;
+            if (deleteRoomSelector.deleteRoom && deleteRoomSelector.deleteRoom.roomId) {
+                newRoomed = newRooms.filter(
+                    (room: any) => parseInt(room.id, 10) !== parseInt(deleteRoomSelector.deleteRoom.roomId, 10),
+                );
+            }
+            setRooms(newRoomed ? newRoomed : newRooms);
         }
-    }, [roomsSelector, userSelector, lastMessagesSelector]);
+    }, [roomsSelector, userSelector, lastMessagesSelector, deleteRoomSelector]);
 
     useEffect(() => {
         dispatch(getRoom());
     }, []);
-
-    useEffect(() => {
-        if (deleteRoomSelector.deleteRoom && deleteRoomSelector.deleteRoom.roomId) {
-            setRooms(rooms.filter((room) => room.id !== deleteRoomSelector.deleteRoom.roomId));
-        }
-    }, [deleteRoomSelector]);
 
     useEffect(() => {
         if (userSelector && userSelector.currentUser) {

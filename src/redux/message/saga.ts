@@ -1,7 +1,13 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import { ResponseResult } from '../../types/redux';
-import { getMessagesResult, createMessagesResult, deleteMessagesResult, voiceMessagesResult } from './actions';
-import { getMessagesApi, postMessagesApi, deleteMessagesApi, voiceMessagesApi } from './api';
+import {
+    getMessagesResult,
+    createMessagesResult,
+    deleteMessagesResult,
+    voiceMessagesResult,
+    outMessagesResult,
+} from './actions';
+import { getMessagesApi, postMessagesApi, deleteMessagesApi, voiceMessagesApi, outMessagesApi } from './api';
 import types from './type';
 
 function* getMessagesSaga(props: any) {
@@ -55,9 +61,20 @@ function* voiceMessagesSaga(props: any) {
     }
 }
 
+function* outMessagesSaga(props: any) {
+    const res: ResponseResult = yield call(outMessagesApi, { ...props.payload });
+    if (res.status === 200) {
+        yield put(outMessagesResult(res.data));
+    } else {
+        const isSuccess = false;
+        yield put(outMessagesResult(res, isSuccess));
+    }
+}
+
 export default function* rootSaga() {
     yield all([takeEvery(types.GET_MESSAGES, getMessagesSaga)]);
     yield all([takeEvery(types.POST_MESSAGES, postMessagesSaga)]);
     yield all([takeEvery(types.DELETE_MESSAGES, deleteMessagesSaga)]);
     yield all([takeEvery(types.VOICE_MESSAGES, voiceMessagesSaga)]);
+    yield all([takeEvery(types.OUT_MESSAGES, outMessagesSaga)]);
 }

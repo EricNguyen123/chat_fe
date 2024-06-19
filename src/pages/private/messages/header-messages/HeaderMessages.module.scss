@@ -78,3 +78,22 @@
     font-weight: 400;
     font-family: var(--font-family-1);
 }
+
+.add-viewer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    background-color: rgba(22, 24, 35, 0.6);
+    .box-detail {
+        width: max-content;
+        background-color: var(--white);
+        padding: 50px;
+        border-radius: var(--border-radius-box);
+    }
+}

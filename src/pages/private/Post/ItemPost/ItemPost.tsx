@@ -336,6 +336,9 @@ const ItemPost: React.FC<Props> = ({ data, modal = false }) => {
             )}
             {deleteOpen && (
                 <ConfirmDelete
+                    text={t('noti.noti_delete')}
+                    textBtnConfirm={t('noti.delete')}
+                    textBtnCancel={t('noti.cancel')}
                     closeViewer={() => {
                         closeViewer();
                     }}

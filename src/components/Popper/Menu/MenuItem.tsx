@@ -5,8 +5,8 @@ import styles from './Menu.module.scss';
 const cx = classNames.bind(styles);
 
 interface Props {
-  data?: any;
-  onClick?: any;
+    data?: any;
+    onClick?: any;
 }
 
 const MenuItem: React.FC<Props> = ({ data, onClick }) => {
@@ -18,6 +18,6 @@ const MenuItem: React.FC<Props> = ({ data, onClick }) => {
             {data.title}
         </ButtonItem>
     );
-}
+};
 
 export default MenuItem;

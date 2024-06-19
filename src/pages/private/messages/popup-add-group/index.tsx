@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Checkbox, ConfigProvider } from 'antd';
 import AccountItem from '../../../../components/AccountItem';
 import { createGroupRoom } from '../../../../redux/room/actions';
+import { useTranslation } from 'react-i18next';
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +21,7 @@ const validationSchema = Yup.object({
 });
 
 const PopupAddGroup: React.FC = () => {
+    const { t } = useTranslation('messages');
     const dispatch = useDispatch();
     const fileInputRef = useRef<HTMLInputElement>(null);
     const userSelector = useSelector(({ users }: any) => users);
@@ -66,7 +68,7 @@ const PopupAddGroup: React.FC = () => {
         <div className={cx('wrapper')}>
             <div className={cx('header-popup')}>
                 <div className={cx('title-popup')}>
-                    <span className={cx('text')}>Add Group</span>
+                    <span className={cx('text')}>{t('header.add_group')}</span>
                 </div>
                 <div className={cx('body-header')}>
                     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
@@ -125,7 +127,7 @@ const PopupAddGroup: React.FC = () => {
                                     </div>
                                 </div>
                                 <button type="submit" disabled={isSubmitting} className={cx('submit')}>
-                                    <span className={cx('text-btn')}>Create</span>
+                                    <span className={cx('text-btn')}>{t('btn.btn_create')}</span>
                                 </button>
                             </Form>
                         )}
@@ -134,7 +136,7 @@ const PopupAddGroup: React.FC = () => {
             </div>
             {users.length > 0 && (
                 <>
-                    <h2 className={cx('title-nav-footer')}>Accounts</h2>
+                    <h2 className={cx('title-nav-footer')}>{t('header.accounts')}</h2>
                     <div className={cx('line-nav')}></div>
                 </>
             )}

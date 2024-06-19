@@ -5,6 +5,15 @@
         "message": "Message..."
     },
     "header": {
-        "is_active": "Is active"
+        "is_active": "Is active",
+        "add_group": "Add Group",
+        "accounts": "Accounts"
+    },
+    "noti": {
+        "noti_your_msg": "Your messages",
+        "noti_send_msg_new_chat": "Send a message to start a chat."
+    },
+    "btn": {
+        "btn_create": "Create"
     }
 }

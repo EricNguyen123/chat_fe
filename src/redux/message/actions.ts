@@ -40,3 +40,13 @@ export const voiceMessagesResult = (result: any, isSuccess = true): Action => ({
     type: isSuccess ? types.VOICE_MESSAGES_SUCCESS : types.VOICE_MESSAGES_FAILED,
     payload: result,
 });
+
+export const outMessages = (data: any): Action => ({
+    type: types.OUT_MESSAGES,
+    payload: data,
+});
+
+export const outMessagesResult = (result: any, isSuccess = true): Action => ({
+    type: isSuccess ? types.OUT_MESSAGES_SUCCESS : types.OUT_MESSAGES_FAILED,
+    payload: result,
+});

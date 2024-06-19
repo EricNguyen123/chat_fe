@@ -68,8 +68,10 @@ const ItemUser: React.FC<Props> = ({ to, onClick, className, data, lastMessage, 
                             {lastMessage.length > 0 && (
                                 <>
                                     <span className={cx('msg')}>
-                                        {`${userChatEnd.length > 0 ? userChatEnd[0].name : ''}: 
-                                ${lastMessage.length > 0 ? lastMessage[0].messages : ''}`}
+                                        <span className={cx('text-name-inner')}>
+                                            {`${userChatEnd.length > 0 ? userChatEnd[0].name + ':' : ''} 
+                                    ${lastMessage.length > 0 ? lastMessage[0].messages : ''}`}
+                                        </span>
                                     </span>
                                     <span className={cx('break')}>
                                         <span className={cx('icon-br')}>&nbsp;</span>
@@ -89,6 +91,9 @@ const ItemUser: React.FC<Props> = ({ to, onClick, className, data, lastMessage, 
             </div>
             {deleteOpen && (
                 <ConfirmDelete
+                    text={t('noti.noti_delete')}
+                    textBtnConfirm={t('noti.delete')}
+                    textBtnCancel={t('noti.cancel')}
                     closeViewer={() => {
                         closeViewer();
                     }}

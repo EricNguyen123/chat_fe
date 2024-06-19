@@ -5,7 +5,10 @@
         "cancel": "Cancel",
         "no_post": "There are no posts to display.",
         "liked": "Likes",
-        "not_support_audio": "Your browser does not support the audio element."
+        "not_support_audio": "Your browser does not support the audio element.",
+        "voice_chat": "Voice Chat",
+        "noti_out_room": "Are you sure you want to leave the group?",
+        "out": "Leave"
     },
     "form": {
         "body": "Create articles",

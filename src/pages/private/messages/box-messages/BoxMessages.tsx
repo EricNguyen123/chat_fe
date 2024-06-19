@@ -7,6 +7,7 @@ import MessageForm from '../message-form';
 import ContentMesages from '../content-mesages';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMessages } from '../../../../redux/message/actions';
+import { useTranslation } from 'react-i18next';
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +18,7 @@ interface Props {
 }
 
 const BoxMessages: React.FC<Props> = ({ checkMessage, id, roomInfor }) => {
+    const { t } = useTranslation('messages');
     const dispatch = useDispatch();
     const messagesSelector = useSelector(({ messages }: any) => messages);
     const [messages, setMessages] = useState<any[]>([]);
@@ -38,8 +40,8 @@ const BoxMessages: React.FC<Props> = ({ checkMessage, id, roomInfor }) => {
             {!checkMessage && (
                 <div className={cx('not-msg')}>
                     <NotMessagesIcon />
-                    <span className={cx('title-msg')}>Your messages</span>
-                    <span className={cx('tiny-title')}>Send a message to start a chat.</span>
+                    <span className={cx('title-msg')}>{t('noti.noti_your_msg')}</span>
+                    <span className={cx('tiny-title')}>{t('noti.noti_send_msg_new_chat')}</span>
                 </div>
             )}
             {checkMessage && (

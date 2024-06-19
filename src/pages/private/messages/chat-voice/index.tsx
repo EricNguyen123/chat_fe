@@ -32,7 +32,7 @@ const ChatComponent: React.FC<Props> = ({ recordedBlobs, onViewer }) => {
 
     return (
         <div className={cx('wrapper')}>
-            <h1 className={cx('text-voice')}>Chat</h1>
+            <h1 className={cx('text-voice')}>{t('noti.voice_chat')}</h1>
             <VoiceRecorder onStop={handleStop} recordedBlobs={recordedBlobs} onViewer={onViewer} />
             {audioMessages.map((audioPath, index) => (
                 <div key={index}>

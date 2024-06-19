@@ -61,6 +61,7 @@ export default function userReducer(state: MessageState = initState, action: Act
             const currentUserId = dataUser ? dataUser.id : undefined;
             const socketEvents = setupSocketEvents && setupSocketEvents(currentUserId);
             socketEvents && socketEvents.sendMessageDelete(action.payload.roomId, action.payload.id);
+            socketEvents && socketEvents.sendAllLastMessages(currentUserId);
             return {
                 ...state,
                 loading: false,
@@ -86,6 +87,7 @@ export default function userReducer(state: MessageState = initState, action: Act
                     action.payload.data.userId,
                     JSON.stringify(action.payload.data),
                 );
+            socketEvents && socketEvents.sendAllLastMessages(currentUserId);
             return {
                 ...state,
                 loading: false,
@@ -94,6 +96,32 @@ export default function userReducer(state: MessageState = initState, action: Act
         }
 
         case types.VOICE_MESSAGES_FAILED: {
+            return { ...state, loading: false };
+        }
+
+        case types.OUT_MESSAGES: {
+            return { ...state, loading: true };
+        }
+
+        case types.OUT_MESSAGES_SUCCESS: {
+            const dataUser = localStorage.data ? JSON.parse(localStorage.data) : undefined;
+            const currentUserId = dataUser ? dataUser.id : undefined;
+            const socketEvents = setupSocketEvents && setupSocketEvents(currentUserId);
+            socketEvents &&
+                socketEvents.sendRoomMessage(
+                    action.payload.roomId,
+                    action.payload.userId,
+                    JSON.stringify(action.payload.outMessage),
+                );
+            socketEvents && socketEvents.sendAllLastMessages(currentUserId);
+            return {
+                ...state,
+                loading: false,
+                outMessage: action.payload.outMessage || undefined,
+            };
+        }
+
+        case types.OUT_MESSAGES_FAILED: {
             return { ...state, loading: false };
         }
 

@@ -17,6 +17,7 @@ import { setupSocketEvents } from '../../../../../services/socketEvents';
 import { useParams } from 'react-router-dom';
 import ReactsMessages from '../../reacts-messages';
 import { createReact, deleteReact } from '../../../../../redux/reactIcon/actions';
+import NotiRoom from '../../../../../components/NotiRoom';
 
 const cx = classNames.bind(styles);
 
@@ -194,6 +195,9 @@ const MessageItem: React.FC<MessageItemProps> = ({
                 )}
                 {deleteOpen && (
                     <ConfirmDelete
+                        text={t('noti.noti_delete')}
+                        textBtnConfirm={t('noti.delete')}
+                        textBtnCancel={t('noti.cancel')}
                         closeViewer={() => {
                             closeViewer();
                         }}
@@ -226,6 +230,7 @@ const ItemMessages: React.FC<Props> = ({ data }) => {
                 sender: e.userId === userSelector.currentUser.id ? 'user' : 'friend',
                 MediaItems: e.MediaItems,
                 Reacts: e.Reacts,
+                outCheck: e.outCheck,
             }));
 
             setMessageList(messages);
@@ -245,6 +250,7 @@ const ItemMessages: React.FC<Props> = ({ data }) => {
                 sender: parseInt(newMsg.userId, 10) === parseInt(userSelector.currentUser.id, 10) ? 'user' : 'friend',
                 MediaItems: newMsg.MediaItems,
                 Reacts: newMsg.Reacts,
+                outCheck: newMsg.outCheck,
             };
             if (msg && newMsg.roomId === id) {
                 setMessageList([...messageList, msg]);
@@ -281,12 +287,20 @@ const ItemMessages: React.FC<Props> = ({ data }) => {
             return false;
         }
     };
+
     return (
         <div className={cx('wrapper')}>
             {messageList.map((message, index) => {
                 const showDateLine = handleTimeLine(index, message);
                 const showAvataChanged = handleAvatarChanged(index, message);
-                return (
+                return message.outCheck ? (
+                    <NotiRoom
+                        key={index}
+                        text={message && message.text}
+                        avatar={message && message.avatar}
+                        time={message && message.time}
+                    />
+                ) : (
                     <MessageItem
                         key={index}
                         id={message && message.id}

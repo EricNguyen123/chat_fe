@@ -1,0 +1,25 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+
+    .inner {
+        padding: 3px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--tux-colorBGView);
+        border-radius: 10px;
+        .text-msg,
+        .timeStamp {
+            font-size: 14px;
+            font-weight: 500;
+            font-family: var(--font-family-1);
+            color: var(--text-color);
+            margin-left: 5px;
+            color: var(--tux-colorLineInput);
+        }
+    }
+}

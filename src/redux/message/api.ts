@@ -24,3 +24,9 @@ export const voiceMessagesApi = (data: any): Promise<AxiosResponse> => {
         },
     });
 };
+
+export const outMessagesApi = (data: any): Promise<AxiosResponse> => {
+    return api.post(`/rooms/destroy_group`, {
+        ...data,
+    });
+};
